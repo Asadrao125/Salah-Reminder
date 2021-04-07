@@ -12,24 +12,22 @@ import java.util.*
 
 fun Context.showBanner(bannerLayout: FrameLayout) {
 
-        val adaptiveAds = AdaptiveAds(this)
-        val adView = AdView(this)
-        adView.adUnitId = getString(R.string.admob_banner_id)
-        bannerLayout.addView(adView)
-        val testDevices = ArrayList<String>()
-        testDevices.add(AdRequest.DEVICE_ID_EMULATOR)
-        val requestConfiguration = RequestConfiguration.Builder()
-                .setTestDeviceIds(testDevices)
-                .build()
-        MobileAds.setRequestConfiguration(requestConfiguration)
-        adView.adSize = adaptiveAds.adSize
-                adView.loadAd(AdRequest.Builder().build())
-
+    val adaptiveAds = AdaptiveAds(this)
+    val adView = AdView(this)
+    adView.adUnitId = getString(R.string.admob_banner_id)
+    bannerLayout.addView(adView)
+    val testDevices = ArrayList<String>()
+    testDevices.add(AdRequest.DEVICE_ID_EMULATOR)
+    val requestConfiguration = RequestConfiguration.Builder().setTestDeviceIds(testDevices).build()
+    MobileAds.setRequestConfiguration(requestConfiguration)
+    adView.adSize = adaptiveAds.adSize
+    adView.loadAd(AdRequest.Builder().build())
 }
+
 fun Context.showInterstitial() {
 
-                if (SingletonAds.instance.isLoaded) {
-                        SingletonAds.instance.show()
-                }
+    if (SingletonAds.instance.isLoaded) {
+        SingletonAds.instance.show()
+    }
 
 }

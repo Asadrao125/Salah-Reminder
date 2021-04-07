@@ -1,14 +1,8 @@
 <resources>
     <string name="app_name">Salah and Qaza Reminder</string>
-    <!--<string name="Open">Open</string>
-    <string name="Close">Close</string>-->
     <string name="channel_name">chanel_name</string>
     <string name="fajar">Fajar:</string>
-    <!--<string name="yes">Yes</string>
-    <string name="no">No</string>-->
-
     <string name="admob_app_id">ca-app-pub-2137792542799325~6269926192</string>
     <string name="admob_banner_id">ca-app-pub-2137792542799325/8764776338</string>
     <string name="admob_interstitial">ca-app-pub-3940256099942544/1033173712</string>
-
 </resources>

@@ -7,4 +7,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="AppTheme.MyThemeName" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ToolBarTheme" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="android:tint">@color/colorWhite</item>
+    </style>
+
 </resources>

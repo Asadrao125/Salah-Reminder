@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical">
+    android:background="@color/colorWhite"
+    tools:context=".activities.NamazTimingsActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/upper_screen_layout"
@@ -17,7 +18,8 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:weightSum="3"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -26,49 +28,33 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="20dp"
                 android:orientation="vertical">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/ic_location" />
 
                 <TextView
                     android:id="@+id/tvLocation1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/arialnarrow7"
+                    android:maxLength="21"
                     android:text="Location Text Will Be"
                     android:textColor="@color/colorWhite"
-                    android:textSize="15dp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/tvLocation2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:fontFamily="@font/arialnarrow7"
-                    android:text="Shown Here"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="15dp"
+                    android:textSize="15sp"
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:layout_gravity="center"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="30dp"
                     android:src="@drawable/sunrise" />
 
                 <TextView
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
                     android:fontFamily="@font/arialnarrow7"
                     android:text="Sunrise"
                     android:textColor="@color/colorWhite"
@@ -76,75 +62,73 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_gravity="center"
                     android:id="@+id/tv_sunrise"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
                     android:fontFamily="@font/arialnarrow7"
                     android:text="5 : 20 pm"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp" />
+
             </LinearLayout>
 
             <LinearLayout
+                android:layout_margin="20dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
-                android:layout_height="80dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="30dp"
-                android:orientation="vertical">
+                android:layout_height="wrap_content">
 
-                <TextView
-                    android:layout_width="4dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorWhite" />
+                <View
+                    android:layout_width="5px"
+                    android:layout_height="50dp"
+                    android:background="@color/colorWhite"/>
 
             </LinearLayout>
 
             <LinearLayout
+                android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="30dp"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/c_time"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
                     android:fontFamily="@font/arialnarrow7"
                     android:text="00 : 00 AM"
                     android:textColor="@color/colorWhite"
-                    android:textSize="30dp"
+                    android:textSize="30sp"
                     android:textStyle="bold" />
 
                 <ImageView
+                    android:layout_gravity="center"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:layout_marginLeft="70dp"
-                    android:layout_marginTop="36dp"
                     android:src="@drawable/sunset" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
                     android:fontFamily="@font/arialnarrow7"
                     android:text="Sunset"
+                    android:layout_gravity="center"
                     android:textColor="@color/colorWhite"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
                 <TextView
+                    android:layout_gravity="center"
                     android:id="@+id/tv_sunset"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="65dp"
                     android:fontFamily="@font/arialnarrow7"
                     android:text="7 : 10 pm"
                     android:textColor="@color/colorWhite"
                     android:textSize="18sp" />
-
 
             </LinearLayout>
 
@@ -208,7 +192,6 @@
                 app:layout_constraintStart_toEndOf="@id/img_calender"
                 app:layout_constraintTop_toBottomOf="@id/txt_View_Day" />
 
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </LinearLayout>
@@ -243,28 +226,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvQazaNamaz"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="20dp"
-                    android:background="@drawable/border"
-                    android:fontFamily="@font/arialnarrow7"
-                    android:padding="5dp"
-                    android:text="Qaza Namaz: "
-                    android:textColor="@color/texr_color"
-                    android:textSize="25sp" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginLeft="50dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="@color/silver" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -519,21 +480,6 @@
                         android:textColor="@color/texr_color"
                         android:textSize="15dp"
                         android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/silver" />
 
                 </LinearLayout>
 
