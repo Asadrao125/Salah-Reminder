@@ -11,7 +11,7 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".activities.QiblaCompassActivity"></activity>
         <activity android:name=".activities.ZakaatCalculator" />
-        <activity android:name=".tasbeeh_files.TasbeehActivity" />
+        <activity android:name=".activities.TasbeehActivity" />
         <activity android:name=".activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

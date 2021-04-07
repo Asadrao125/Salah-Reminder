@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 import com.google.salahreminder.R;
+import com.google.salahreminder.activities.TasbeehActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,15 +30,12 @@ public class AboutDialog extends AppCompatDialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("About")
                 .setIcon(R.drawable.ic_fluent_info_24_regular)
-                .setMessage("Digital Counter app is maplerr's project build because he bored in lockdown\n" +
-                        "This project repository is available on GitHub\n\n" +
-                        "Version " + VERSION_NAME)
+                .setMessage("Specifically Designed for Ramadan\n\n" + "Version " + VERSION_NAME)
                 .setPositiveButton("CLOSE", null)
                 .setNeutralButton("SOCMED", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ((TasbeehActivity) getActivity()).openWebPage("https://linktr.ee/iqFareez");
-                        Toast.makeText(context, "Follow me lol :D", Toast.LENGTH_SHORT).show();
                     }
                 });
 

@@ -1,4 +1,4 @@
-package com.google.salahreminder.tasbeeh_files;
+package com.google.salahreminder.activities;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -27,6 +27,7 @@ import android.widget.TextView;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.google.salahreminder.R;
+import com.google.salahreminder.tasbeeh_files.ResetDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

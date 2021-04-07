@@ -9,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.google.salahreminder.R;
-import com.google.salahreminder.tasbeeh_files.TasbeehActivity;
 import com.google.salahreminder.utils.GPSTracker;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
