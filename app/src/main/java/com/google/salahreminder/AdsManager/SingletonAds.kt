@@ -7,7 +7,6 @@ import com.google.salahreminder.R
 
 class SingletonAds private constructor(context: Context) {
 
-
     private object InterstitialAds {
         fun instance(context: Context): SingletonAds {
             return SingletonAds(context)

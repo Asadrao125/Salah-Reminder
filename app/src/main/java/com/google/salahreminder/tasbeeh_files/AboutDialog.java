@@ -31,14 +31,13 @@ public class AboutDialog extends AppCompatDialogFragment {
         builder.setTitle("About")
                 .setIcon(R.drawable.ic_fluent_info_24_regular)
                 .setMessage("Specifically Designed for Ramadan\n\n" + "Version " + VERSION_NAME)
-                .setPositiveButton("CLOSE", null)
-                .setNeutralButton("SOCMED", new DialogInterface.OnClickListener() {
+                .setPositiveButton("CLOSE", null);
+                /*.setNeutralButton("SOCMED", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         ((TasbeehActivity) getActivity()).openWebPage("https://linktr.ee/iqFareez");
                     }
-                });
-
+                });*/
         return builder.create();
     }
 }

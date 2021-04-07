@@ -13,23 +13,39 @@
         android:layout_height="wrap_content"
         android:background="@color/app_color">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-
             <TextView
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Home"
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
 
-        </LinearLayout>
+            <ImageView
+                android:layout_centerVertical="true"
+                android:id="@+id/imgShare"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_toStartOf="@+id/imgAbout"
+                android:src="@drawable/ic_share"/>
+
+            <ImageView
+                android:layout_alignParentEnd="true"
+                android:id="@+id/imgAbout"
+                android:layout_centerVertical="true"
+                android:padding="10dp"
+                android:layout_width="wrap_content"
+                app:tint="@color/colorWhite"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_fluent_info_24_regular"/>
+
+        </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -74,6 +90,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Qibla Compass" />
+
+        <FrameLayout
+            android:layout_marginTop="20dp"
+            android:id="@+id/ad_view_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
 
