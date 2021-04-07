@@ -43,22 +43,37 @@
         <Button
             android:id="@+id/btnNamazTimings"
             android:layout_width="match_parent"
+            android:background="@color/app_color"
+            android:textColor="@color/colorWhite"
             android:layout_height="wrap_content"
             android:text="Namaz Timings" />
 
         <Button
             android:id="@+id/btnTasbeeh"
+            android:background="@color/app_color"
+            android:textColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Digital Tasbeeh" />
 
         <Button
+            android:background="@color/app_color"
+            android:textColor="@color/colorWhite"
             android:id="@+id/btnZakaatCalculator"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Zakaat Calculator" />
+
+        <Button
+            android:background="@color/app_color"
+            android:textColor="@color/colorWhite"
+            android:id="@+id/btnQiblaCompass"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="Qibla Compass" />
 
     </LinearLayout>
 

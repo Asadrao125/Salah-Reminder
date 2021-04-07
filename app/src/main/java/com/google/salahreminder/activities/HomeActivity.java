@@ -20,7 +20,7 @@ import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
-    Button btnNamazTimings, btnTasbeeh, btnZakaatCalculator;
+    Button btnNamazTimings, btnTasbeeh, btnZakaatCalculator, btnQiblaCompass;
     GPSTracker gpsTracker;
 
     @Override
@@ -32,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
         btnTasbeeh = findViewById(R.id.btnTasbeeh);
         btnZakaatCalculator = findViewById(R.id.btnZakaatCalculator);
         gpsTracker = new GPSTracker();
+        btnQiblaCompass= findViewById(R.id.btnQiblaCompass);
 
         btnNamazTimings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +52,13 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this, ZakaatCalculator.class));
+            }
+        });
+
+        btnQiblaCompass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HomeActivity.this, QiblaCompassActivity.class));
             }
         });
     }

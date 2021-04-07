@@ -60,7 +60,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashbord);
+        setContentView(R.layout.activity_namaz_timings);
 
         initialization();
 
