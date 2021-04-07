@@ -9,7 +9,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.QiblaCompassActivity"></activity>
+        <activity android:name=".activities.Start"/>
+        <activity android:name=".activities.QiblaCompassActivity"/>
         <activity android:name=".activities.ZakaatCalculator" />
         <activity android:name=".activities.TasbeehActivity" />
         <activity android:name=".activities.HomeActivity">
@@ -28,6 +29,7 @@
         <receiver
             android:name=".utils.ExecutableService"
             android:enabled="true" />
+
         <receiver
             android:name=".utils.Reciever"
             android:enabled="true" />

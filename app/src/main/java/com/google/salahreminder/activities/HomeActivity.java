@@ -26,7 +26,7 @@ import static com.google.salahreminder.AdsManager.AdsKt.showBanner;
 import static com.google.salahreminder.AdsManager.AdsKt.showInterstitial;
 
 public class HomeActivity extends AppCompatActivity {
-    Button btnNamazTimings, btnTasbeeh, btnZakaatCalculator, btnQiblaCompass;
+    Button btnNamazTimings, btnTasbeeh, btnZakaatCalculator, btnQiblaCompass, btnNamesOfAllah;
     GPSTracker gpsTracker;
     ImageView imgAbout, imgShare;
 
@@ -42,6 +42,7 @@ public class HomeActivity extends AppCompatActivity {
         btnQiblaCompass = findViewById(R.id.btnQiblaCompass);
         imgAbout = findViewById(R.id.imgAbout);
         imgShare = findViewById(R.id.imgShare);
+        btnNamesOfAllah = findViewById(R.id.btnNamesOfAllah);
 
         /*SingletonAds.Companion.init(getApplicationContext());
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
@@ -89,6 +90,14 @@ public class HomeActivity extends AppCompatActivity {
                 shareIntent();
             }
         });
+
+        btnNamesOfAllah.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(), Start.class));
+            }
+        });
+
     }
 
     public void shareIntent() {

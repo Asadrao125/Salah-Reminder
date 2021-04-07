@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/colorWhite"
     tools:context=".activities.HomeActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -59,14 +60,14 @@
         <Button
             android:id="@+id/btnNamazTimings"
             android:layout_width="match_parent"
-            android:background="@color/app_color"
+            android:background="@drawable/button_border"
             android:textColor="@color/colorWhite"
             android:layout_height="wrap_content"
             android:text="Namaz Timings" />
 
         <Button
             android:id="@+id/btnTasbeeh"
-            android:background="@color/app_color"
+            android:background="@drawable/button_border"
             android:textColor="@color/colorWhite"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,7 +75,7 @@
             android:text="Digital Tasbeeh" />
 
         <Button
-            android:background="@color/app_color"
+            android:background="@drawable/button_border"
             android:textColor="@color/colorWhite"
             android:id="@+id/btnZakaatCalculator"
             android:layout_width="match_parent"
@@ -83,13 +84,23 @@
             android:text="Zakaat Calculator" />
 
         <Button
-            android:background="@color/app_color"
+            android:background="@drawable/button_border"
             android:textColor="@color/colorWhite"
             android:id="@+id/btnQiblaCompass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:text="Qibla Compass" />
+
+        <Button
+            android:background="@drawable/button_border"
+            android:textColor="@color/colorWhite"
+            android:clickable="true"
+            android:id="@+id/btnNamesOfAllah"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="99 Names of Allah" />
 
         <FrameLayout
             android:layout_marginTop="20dp"
