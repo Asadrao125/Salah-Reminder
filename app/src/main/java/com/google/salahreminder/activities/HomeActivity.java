@@ -26,6 +26,13 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import net.time4j.SystemClock;
+import net.time4j.android.ApplicationStarter;
+import net.time4j.calendar.HijriCalendar;
+import net.time4j.engine.StartOfDay;
+import net.time4j.format.expert.ChronoFormatter;
+import net.time4j.format.expert.PatternType;
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -45,6 +52,7 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ApplicationStarter.initialize(this, true);
         setContentView(R.layout.activity_home);
 
         init();
@@ -166,6 +174,34 @@ public class HomeActivity extends AppCompatActivity {
                 token.continuePermissionRequest();
             }
         }).check();
+    }
+
+    private void getHijriDate() {
+        ChronoFormatter<HijriCalendar> hijriFormat =
+                ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
+                        .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
+                        .addPattern(" MMMM yyyy", PatternType.CLDR)
+                        .build()
+                        .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
+
+// conversion from gregorian to hijri-umalqura valid at noon
+// (not really valid in the evening when next islamic day starts)
+        HijriCalendar today =
+                SystemClock.inLocalView().today().transform(
+                        HijriCalendar.class,
+                        HijriCalendar.VARIANT_UMALQURA
+                );
+        System.out.println(hijriFormat.format(today)); // 22nd Rajab 1438
+
+// taking into account the specific start of day for Hijri calendar
+        HijriCalendar todayExact =
+                SystemClock.inLocalView().now(
+                        HijriCalendar.family(),
+                        HijriCalendar.VARIANT_UMALQURA,
+                        StartOfDay.EVENING // simple approximation => 18:00
+                ).toDate();
+        System.out.println(hijriFormat.format(todayExact)); // 22nd Rajab 1438 (23rd after 18:00)
+        tvHijriDate.setText("" + todayExact);
     }
 
 }

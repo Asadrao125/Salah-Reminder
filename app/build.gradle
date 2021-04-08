@@ -52,5 +52,6 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:15.0.0'
     //
     implementation 'com.karumi:dexter:6.2.2'
+    implementation group: 'net.time4j', name: 'time4j-android', version: '4.8-2021a'
 
 }
