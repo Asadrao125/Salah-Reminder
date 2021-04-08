@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#116F8A</color>
-    <color name="colorPrimaryDark">#116F8A</color>
-    <color name="colorAccent">#116F8A</color>
-    <color name="red">#FF0000</color>
-    <color name="silver">#cacaca</color>
-    <color name="dark_silver">#a0a0a0</color>
-    <color name="texr_color">#969696</color>
+    <color name="colorPrimary">#0b8f08</color>
+    <color name="colorPrimaryDark">#0b8f08</color>
+    <color name="colorAccent">#0b8f08</color>
+    <color name="red">#0b8f08</color>
+    <color name="silver">#0b8f08</color>
+    <color name="dark_silver">#0b8f08</color>
+    <color name="texr_color">#0b8f08</color>
     <color name="colorWhite">#fff</color>
-    <color name="green">#66b572</color>
+    <color name="green">#0b8f08</color>
 
     <color name="black">#000000</color>
 
-    <color name="app_color">#297790</color>
+    <color name="app_color">#0b8f08</color>
+
+    <color name="color_1">#42bc43</color>
+    <color name="color_2">#2caf2b</color>
+    <color name="color_3">#0b8f08</color>
+    <color name="color_4">#0b7e07</color>
+    <color name="color_5">#056b00</color>
 
 </resources>

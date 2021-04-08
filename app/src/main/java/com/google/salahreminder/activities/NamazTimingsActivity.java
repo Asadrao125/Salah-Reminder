@@ -15,6 +15,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,8 +53,10 @@ public class NamazTimingsActivity extends AppCompatActivity {
     GPSTracker gpsTracker;
     SharedPreferences prefs;
     long current_h, current_m;
-    TextView txt_View_Date, tvSunrise, tvSunset, tvLocation1;
-    TextView tvFajar, tvZuhar, tvAsar, tvMaghrib, tvIsha, txt_View_Day;
+    ImageView imgBack;
+    /* txt_View_Date, txt_View_Day */
+    TextView tvSunrise, tvSunset, tvLocation1;
+    TextView tvFajar, tvZuhar, tvAsar, tvMaghrib, tvIsha;
     String MY_PREFS_NAME = "Namaz_Reminder", month, year, date, y, m, dd;
     TextView fajar_fajar, zuhur_zuhar, asar_asar, maghrib_maghrib, isha_isha, c_time;
     String address, ff, zz, mm, ii, aa, sun_rise_sun, sunset_sun_set;
@@ -60,7 +64,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_namaz_timings);
+        setContentView(R.layout.namaz_timings_layout);
 
         initialization();
 
@@ -100,7 +104,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
         Date todayDate = Calendar.getInstance().getTime();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-mmmm-yyyy");
         String todayString = formatter.format(todayDate);
-        txt_View_Date.setText(todayString);
+        //txt_View_Date.setText(todayString);
 
         OffsetDateTime offset = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -113,11 +117,11 @@ public class NamazTimingsActivity extends AppCompatActivity {
         }
 
         String weekday_name = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
-        txt_View_Day.setText("Today / " + weekday_name);
+        //txt_View_Day.setText("Today / " + weekday_name);
 
         Date d = new Date();
         CharSequence s = DateFormat.format("d MMMM yyyy ", d.getTime());
-        txt_View_Date.setText(s);
+        //txt_View_Date.setText(s);
 
         tvSunrise.setText(prefs.getString("s_r", "Set Time"));
         tvSunset.setText(prefs.getString("s_s", "Set Time"));
@@ -126,6 +130,14 @@ public class NamazTimingsActivity extends AppCompatActivity {
             current_h = LocalDateTime.now().getHour();
             current_m = LocalDateTime.now().getMinute();
         }
+
+        imgBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onBackPressed();
+            }
+        });
+
     }
 
     @Override
@@ -134,15 +146,15 @@ public class NamazTimingsActivity extends AppCompatActivity {
         checkPermission();
     }
 
-    private void getResponse(List<Address> addresses) {
+    private void getResponse(String addres) {
         if (getApplicationContext() != null) {
-            String url = "http://api.aladhan.com/v1/timingsByAddress?address=" + addresses;
+            String url = "http://api.aladhan.com/v1/timingsByAddress?address=" + addres;
             ////
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                     url, null,
                     new Response.Listener<JSONObject>() {
 
-                        @Override
+                        @Override/* Unnamed Road, Latifabad Unit 7 Latifabad, Hyderabad, Sindh 71000, Pakistan */
                         public void onResponse(JSONObject response) {
                             try {
 
@@ -356,8 +368,8 @@ public class NamazTimingsActivity extends AppCompatActivity {
         tvAsar = findViewById(R.id.tvAsar);
         tvMaghrib = findViewById(R.id.tvMaghrib);
         tvIsha = findViewById(R.id.tvIsha);
-        txt_View_Date = findViewById(R.id.txt_View_Date);
-        txt_View_Day = findViewById(R.id.txt_View_Day);
+        //txt_View_Date = findViewById(R.id.txt_View_Date);
+        //txt_View_Day = findViewById(R.id.txt_View_Day);
         tvSunrise = findViewById(R.id.tv_sunrise);
         tvSunset = findViewById(R.id.tv_sunset);
         fajar_fajar = findViewById(R.id.fajar);
@@ -368,6 +380,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
         tvLocation1 = findViewById(R.id.tvLocation1);
         c_time = findViewById(R.id.c_time);
         prefs = this.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
+        imgBack = findViewById(R.id.imgBack);
     }
 
     private void checkPermission() {
@@ -388,8 +401,10 @@ public class NamazTimingsActivity extends AppCompatActivity {
                             addresses = geocoder.getFromLocation(gpsTracker.getLatitude(), gpsTracker.getLongitude(), 1);
                             address = addresses.get(0).getAddressLine(0);
                             Log.d("Location_Address", "onLocationChanged: " + address);
-                            getResponse(addresses);
-                            tvLocation1.setText(address);
+                            getResponse(address);
+                            String city = addresses.get(0).getLocality();
+                            String country = addresses.get(0).getCountryName();
+                            tvLocation1.setText(city + " " + country);
                         } catch (
                                 IOException e) {
                             e.printStackTrace();

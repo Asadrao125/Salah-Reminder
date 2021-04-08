@@ -1,14 +1,20 @@
 package com.google.salahreminder.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 
 import android.Manifest;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
 import android.os.Bundle;
+import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.salahreminder.AdsManager.SingletonAds;
 import com.google.salahreminder.R;
@@ -20,84 +26,114 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import static com.google.salahreminder.AdsManager.AdsKt.showBanner;
 import static com.google.salahreminder.AdsManager.AdsKt.showInterstitial;
 
 public class HomeActivity extends AppCompatActivity {
-    Button btnNamazTimings, btnTasbeeh, btnZakaatCalculator, btnQiblaCompass, btnNamesOfAllah;
     GPSTracker gpsTracker;
     ImageView imgAbout, imgShare;
+    TextView c_time, tvLocation1, tvHijriDate;
+    String address;
+    CardView cvNamazTimings, cvDigitalTasbeeh, cvZakaatCalculator, cvQiblaCompass, cvNamesOfAllah, cvSettings;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        btnNamazTimings = findViewById(R.id.btnNamazTimings);
-        btnTasbeeh = findViewById(R.id.btnTasbeeh);
-        btnZakaatCalculator = findViewById(R.id.btnZakaatCalculator);
-        gpsTracker = new GPSTracker();
-        btnQiblaCompass = findViewById(R.id.btnQiblaCompass);
-        imgAbout = findViewById(R.id.imgAbout);
-        imgShare = findViewById(R.id.imgShare);
-        btnNamesOfAllah = findViewById(R.id.btnNamesOfAllah);
+        init();
 
         /*SingletonAds.Companion.init(getApplicationContext());
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
         showBanner(HomeActivity.this, banner_container);*/
 
-        btnNamazTimings.setOnClickListener(new View.OnClickListener() {
+        cvNamazTimings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 checkPermission();
             }
         });
 
-        btnTasbeeh.setOnClickListener(new View.OnClickListener() {
+        cvDigitalTasbeeh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this, TasbeehActivity.class));
             }
         });
 
-        btnZakaatCalculator.setOnClickListener(new View.OnClickListener() {
+        cvZakaatCalculator.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this, ZakaatCalculator.class));
             }
         });
 
-        btnQiblaCompass.setOnClickListener(new View.OnClickListener() {
+        cvQiblaCompass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(HomeActivity.this, QiblaCompassActivity.class));
             }
         });
 
-        imgAbout.setOnClickListener(new View.OnClickListener() {
+        cvNamesOfAllah.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                com.google.salahreminder.tasbeeh_files.AboutDialog aboutDialog = new com.google.salahreminder.tasbeeh_files.AboutDialog(HomeActivity.this);
-                aboutDialog.show(getSupportFragmentManager(), "about dialog");
+                startActivity(new Intent(HomeActivity.this, Start.class));
             }
         });
 
-        imgShare.setOnClickListener(new View.OnClickListener() {
+        cvSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareIntent();
+                //startActivity(new Intent(HomeActivity.this, TasbeehActivity.class));
             }
         });
 
-        btnNamesOfAllah.setOnClickListener(new View.OnClickListener() {
+        final Handler someHandler = new Handler(getMainLooper());
+        someHandler.postDelayed(new Runnable() {
             @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(), Start.class));
+            public void run() {
+                c_time.setText(new SimpleDateFormat("hh:mm ss a", Locale.US).format(new Date()));
+                someHandler.postDelayed(this, 1000);
             }
-        });
+        }, 10);
 
+        if (gpsTracker.canGetLocation()) {
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            List<Address> addresses = null;
+            try {
+                addresses = geocoder.getFromLocation(gpsTracker.getLatitude(), gpsTracker.getLongitude(), 1);
+                address = addresses.get(0).getAddressLine(0);
+                Log.d("Location_Address", "onLocationChanged: " + address);
+                String city = addresses.get(0).getLocality();
+                String country = addresses.get(0).getCountryName();
+                tvLocation1.setText(city + " " + country);
+            } catch (
+                    IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private void init() {
+        gpsTracker = new GPSTracker();
+        imgAbout = findViewById(R.id.imgAbout);
+        imgShare = findViewById(R.id.imgShare);
+        c_time = findViewById(R.id.c_time);
+        tvLocation1 = findViewById(R.id.tvLocation1);
+        tvHijriDate = findViewById(R.id.tvHijriDate);
+        cvNamazTimings = findViewById(R.id.cvNamazTimings);
+        cvDigitalTasbeeh = findViewById(R.id.cvDigitalTasbeeh);
+        cvZakaatCalculator = findViewById(R.id.cvZakaatCalculator);
+        cvQiblaCompass = findViewById(R.id.cvQiblaCompass);
+        cvNamesOfAllah = findViewById(R.id.cvNamesOfAllah);
+        cvSettings = findViewById(R.id.cvSettings);
     }
 
     public void shareIntent() {

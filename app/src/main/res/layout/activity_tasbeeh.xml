@@ -5,6 +5,7 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorWhite"
     android:orientation="vertical"
     tools:context=".activities.TasbeehActivity">
 
@@ -45,34 +46,56 @@
 
       </androidx.appcompat.widget.Toolbar>
 
-      <LinearLayout
-          android:id="@+id/targetLayout"
-          android:layout_margin="20dp"
-          android:layout_width="match_parent"
+
+      <FrameLayout
+          android:layout_gravity="center"
+          android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:background="@drawable/border"
-          android:orientation="vertical">
+          android:layout_margin="20dp">
 
-          <TextView
-              android:layout_margin="20dp"
+          <RelativeLayout
               android:layout_gravity="center"
-              android:textSize="18sp"
-              android:textColor="#000"
-              android:id="@+id/textView_progress_target"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Target" />
+              android:id="@+id/targetLayout"
+              android:layout_width="200dp"
+              android:layout_height="200dp"
+              android:orientation="vertical">
 
-          <TextView
-              android:id="@+id/text_zikr"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:text="0"
-              android:layout_marginBottom="20dp"
-              android:textAlignment="center"
-              android:textSize="80sp" />
+              <TextView
+                  android:fontFamily="@font/digital"
+                  android:id="@+id/text_zikr"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  android:text="0"
+                  android:layout_centerInParent="true"
+                  android:textColor="#0aa653"
+                  android:layout_marginBottom="20dp"
+                  android:textAlignment="center"
+                  android:textSize="80sp" />
 
-      </LinearLayout>
+          </RelativeLayout>
+
+          <ProgressBar
+              android:id="@+id/pb"
+              android:layout_width="253dp"
+              android:layout_height="253dp"
+              android:layout_gravity="center"
+              android:indeterminate="false"
+              android:progressDrawable="@drawable/circular_progress_bar"
+              android:background="@drawable/circle_shape"
+              style="?android:attr/progressBarStyleHorizontal"
+              android:max="100"
+              android:progress="65" />
+
+      </FrameLayout>
+
+      <TextView
+          android:layout_gravity="center"
+          android:textSize="18sp"
+          android:textColor="#000"
+          android:id="@+id/textView_progress_target"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Target" />
 
       <RelativeLayout
           android:layout_width="match_parent"
@@ -109,6 +132,7 @@
           </LinearLayout>
 
           <ProgressBar
+              android:visibility="gone"
               android:layout_marginBottom="20dp"
               android:id="@+id/progressBar"
               style="?android:attr/progressBarStyleHorizontal"
@@ -126,6 +150,17 @@
               android:text="Round: 0" />
 
       </RelativeLayout>
+
+      <!--<ProgressBar
+          android:id="@+id/pb"
+          android:layout_width="200dp"
+          android:layout_height="200dp"
+          android:indeterminate="false"
+          android:progressDrawable="@drawable/circular_progress_bar"
+          android:background="@drawable/circle_shape"
+          style="?android:attr/progressBarStyleHorizontal"
+          android:max="100"
+          android:progress="65" />-->
 
   </LinearLayout>
 

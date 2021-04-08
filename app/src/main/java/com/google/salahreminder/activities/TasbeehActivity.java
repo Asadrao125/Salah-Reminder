@@ -53,7 +53,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     private TextView targetText;
     private Button buttonCount;
     private Button resetButton;
-    private ProgressBar progressBar;
+    private ProgressBar progressBar, pb;
     public int countZikr = 0;
     public int targetZikr = 10;
     private int progressCounter = 0;
@@ -74,10 +74,12 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         buttonCount = findViewById(R.id.button_count);
         resetButton = findViewById(R.id.button_reset);
         progressBar = findViewById(R.id.progressBar);
+        pb = findViewById(R.id.pb);
         targetText = findViewById(R.id.textView_progress_target);
         cummulativeText = findViewById(R.id.textView_cummulative_count);
         targetText.setText("Target: " + String.valueOf(targetZikr));
         progressBar.setMax(targetZikr);
+        pb.setMax(targetZikr);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
@@ -241,8 +243,10 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
 
             if (VERSION.SDK_INT >= VERSION_CODES.N) {
                 progressBar.setProgress(0, true); //set progress bar balik ke 0
+                pb.setProgress(0, true);
             } else {
                 progressBar.setProgress(0); //no animation
+                pb.setProgress(0);
             }
 
             showSnackBar(parentLayout, "Reset done");
@@ -255,8 +259,10 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
 
         if (VERSION.SDK_INT >= VERSION_CODES.N) {
             progressBar.setProgress(progressCounter, true);
+            pb.setProgress(progressCounter, true);
         } else {
             progressBar.setProgress(progressCounter); //no animation
+            pb.setProgress(progressCounter);
         }
     }
 
@@ -297,6 +303,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         targetZikr = prefs.getInt(S_TARGET_ZIKR, 10);
 
         progressBar.setMax(targetZikr);
+        pb.setMax(targetZikr);
         updateProgressBar();
 
         targetText.setText("Target: " + String.valueOf(targetZikr));
@@ -351,18 +358,17 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
 
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
-
         if (oldVal != newVal) {
             showSnackBar(parentLayout, "Target number changed to " + newVal);
             targetZikr = newVal;
             targetText.setText("Target: " + String.valueOf(targetZikr));
             progressBar.setMax(targetZikr);
+            pb.setMax(targetZikr);
             cummulativeRound = progressCounter = 0;
             cummulativeText.setText("0");
         } else {
             showSnackBar(parentLayout, "Nothing changed. Target value is " + oldVal);
         }
-
     }
 
     private void vibrateFeedback(long millis) {

@@ -9,105 +9,344 @@
     tools:context=".activities.HomeActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+           android:id="@+id/toolbar"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:background="@color/app_color">
+
+           <RelativeLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+
+               <TextView
+                   android:layout_centerVertical="true"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Home"
+                   android:textColor="@color/colorWhite"
+                   android:textSize="18sp" />
+
+               <ImageView
+                   android:layout_centerVertical="true"
+                   android:id="@+id/imgShare"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:padding="10dp"
+                   android:layout_toStartOf="@+id/imgAbout"
+                   android:src="@drawable/ic_share"/>
+
+               <ImageView
+                   android:layout_alignParentEnd="true"
+                   android:id="@+id/imgAbout"
+                   android:layout_centerVertical="true"
+                   android:padding="10dp"
+                   android:layout_width="wrap_content"
+                   app:tint="@color/colorWhite"
+                   android:layout_height="wrap_content"
+                   android:src="@drawable/ic_fluent_info_24_regular"/>
+
+           </RelativeLayout>
+
+       </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/app_color">
+        android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical"
+            android:background="@color/colorWhite">
 
-            <TextView
-                android:layout_centerVertical="true"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Home"
-                android:textColor="@color/colorWhite"
-                android:textSize="18sp" />
+                android:background="@drawable/bg_home_page"
+                android:orientation="vertical">
 
-            <ImageView
-                android:layout_centerVertical="true"
-                android:id="@+id/imgShare"
-                android:layout_width="wrap_content"
+               <LinearLayout
+                   android:gravity="center"
+                   android:layout_centerInParent="true"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:id="@+id/tvLocation1"
+                       android:textColor="@color/colorWhite"
+                       android:textSize="16sp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="Hyderabad, Pk"/>
+
+                   <TextView
+                       android:id="@+id/c_time"
+                       android:textColor="@color/colorWhite"
+                       android:layout_marginTop="5dp"
+                       android:textStyle="bold"
+                       android:textSize="18sp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="02:30 PM"/>
+
+                   <TextView
+                       android:layout_marginTop="5dp"
+                       android:id="@+id/tvHijriDate"
+                       android:textColor="@color/colorWhite"
+                       android:textSize="18sp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="14 - Shaban - 1436"/>
+
+               </LinearLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp"
-                android:layout_toStartOf="@+id/imgAbout"
-                android:src="@drawable/ic_share"/>
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-            <ImageView
-                android:layout_alignParentEnd="true"
-                android:id="@+id/imgAbout"
-                android:layout_centerVertical="true"
-                android:padding="10dp"
-                android:layout_width="wrap_content"
-                app:tint="@color/colorWhite"
+                <androidx.cardview.widget.CardView
+                    android:layout_weight="1"
+                    android:id="@+id/cvNamazTimings"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/img1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/namaz_timings" />
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/img1"
+                            android:text="Namaz Timings"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:id="@+id/cvDigitalTasbeeh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/img2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/tasbih" />
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:gravity="center"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/img2"
+                            android:text="E - Tasbeeh"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_fluent_info_24_regular"/>
+                android:orientation="horizontal"
+                android:weightSum="2">
 
-        </RelativeLayout>
+                <androidx.cardview.widget.CardView
+                    android:layout_weight="1"
+                    android:id="@+id/cvZakaatCalculator"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
 
-    </androidx.appcompat.widget.Toolbar>
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="20dp"
-        android:gravity="center"
-        android:orientation="vertical">
+                        <ImageView
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/img3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/zakaat_calculator" />
 
-        <Button
-            android:id="@+id/btnNamazTimings"
-            android:layout_width="match_parent"
-            android:background="@drawable/button_border"
-            android:textColor="@color/colorWhite"
-            android:layout_height="wrap_content"
-            android:text="Namaz Timings" />
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/img3"
+                            android:gravity="center"
+                            android:text="Zakaat Calculator"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
 
-        <Button
-            android:id="@+id/btnTasbeeh"
-            android:background="@drawable/button_border"
-            android:textColor="@color/colorWhite"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Digital Tasbeeh" />
+                    </RelativeLayout>
 
-        <Button
-            android:background="@drawable/button_border"
-            android:textColor="@color/colorWhite"
-            android:id="@+id/btnZakaatCalculator"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Zakaat Calculator" />
+                </androidx.cardview.widget.CardView>
 
-        <Button
-            android:background="@drawable/button_border"
-            android:textColor="@color/colorWhite"
-            android:id="@+id/btnQiblaCompass"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Qibla Compass" />
+                <androidx.cardview.widget.CardView
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:id="@+id/cvQiblaCompass"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="8dp">
 
-        <Button
-            android:background="@drawable/button_border"
-            android:textColor="@color/colorWhite"
-            android:clickable="true"
-            android:id="@+id/btnNamesOfAllah"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="99 Names of Allah" />
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
 
-        <FrameLayout
-            android:layout_marginTop="20dp"
-            android:id="@+id/ad_view_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+                        <ImageView
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/img4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/qibla" />
 
-    </LinearLayout>
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/img4"
+                            android:text="Qibla Compass"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginBottom="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="2">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_weight="1"
+                    android:id="@+id/cvNamesOfAllah"
+                    android:layout_width="wrap_content"
+                    android:layout_margin="10dp"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/img5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/names" />
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/img5"
+                            android:text="99 Names of Allah"
+                            android:textColor="@color/black"
+                            android:gravity="center"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <androidx.cardview.widget.CardView
+                    android:layout_weight="1"
+                    android:layout_margin="10dp"
+                    android:id="@+id/cvSettings"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="8dp">
+
+                    <RelativeLayout
+                        android:layout_gravity="center"
+                        android:layout_margin="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginBottom="10dp"
+                            android:id="@+id/img6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/settings" />
+
+                        <TextView
+                            android:layout_width="120dp"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/img6"
+                            android:text="Settings"
+                            android:gravity="center"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                    </RelativeLayout>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </LinearLayout>
