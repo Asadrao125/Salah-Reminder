@@ -28,15 +28,6 @@
                    android:textSize="18sp" />
 
                <ImageView
-                   android:layout_centerVertical="true"
-                   android:id="@+id/imgShare"
-                   android:layout_width="wrap_content"
-                   android:layout_height="wrap_content"
-                   android:padding="10dp"
-                   android:layout_toStartOf="@+id/imgAbout"
-                   android:src="@drawable/ic_share"/>
-
-               <ImageView
                    android:layout_alignParentEnd="true"
                    android:id="@+id/imgAbout"
                    android:layout_centerVertical="true"
@@ -132,7 +123,7 @@
                             android:id="@+id/img1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/namaz_timings" />
+                            android:background="@drawable/namaz" />
 
                         <TextView
                             android:layout_width="120dp"

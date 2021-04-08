@@ -9,8 +9,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.Start"/>
-        <activity android:name=".activities.QiblaCompassActivity"/>
+        <activity android:name=".activities.SettingsActivity"></activity>
+        <activity android:name=".activities.Start" />
+        <activity android:name=".activities.QiblaCompassActivity" />
         <activity android:name=".activities.ZakaatCalculator" />
         <activity android:name=".activities.TasbeehActivity" />
         <activity android:name=".activities.HomeActivity">
@@ -29,19 +30,18 @@
         <receiver
             android:name=".utils.ExecutableService"
             android:enabled="true" />
-
         <receiver
             android:name=".utils.Reciever"
             android:enabled="true" />
     </application>
 
     <uses-feature android:name="android.hardware.location.gps" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
     <uses-permission android:name="android.permission.VIBRATE" />
+
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
 </manifest>

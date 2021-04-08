@@ -44,7 +44,7 @@ import static com.google.salahreminder.AdsManager.AdsKt.showInterstitial;
 
 public class HomeActivity extends AppCompatActivity {
     GPSTracker gpsTracker;
-    ImageView imgAbout, imgShare;
+    ImageView imgAbout;
     TextView c_time, tvLocation1, tvHijriDate;
     String address;
     CardView cvNamazTimings, cvDigitalTasbeeh, cvZakaatCalculator, cvQiblaCompass, cvNamesOfAllah, cvSettings;
@@ -99,7 +99,16 @@ public class HomeActivity extends AppCompatActivity {
         cvSettings.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //startActivity(new Intent(HomeActivity.this, TasbeehActivity.class));
+                startActivity(new Intent(HomeActivity.this, SettingsActivity.class));
+            }
+        });
+
+        imgAbout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                com.google.salahreminder.tasbeeh_files.AboutDialog aboutDialog = new
+                        com.google.salahreminder.tasbeeh_files.AboutDialog(HomeActivity.this);
+                aboutDialog.show(getSupportFragmentManager(), "about dialog");
             }
         });
 
@@ -127,12 +136,14 @@ public class HomeActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+
+        getHijriDate();
+
     }
 
     private void init() {
         gpsTracker = new GPSTracker();
         imgAbout = findViewById(R.id.imgAbout);
-        imgShare = findViewById(R.id.imgShare);
         c_time = findViewById(R.id.c_time);
         tvLocation1 = findViewById(R.id.tvLocation1);
         tvHijriDate = findViewById(R.id.tvHijriDate);
@@ -142,16 +153,6 @@ public class HomeActivity extends AppCompatActivity {
         cvQiblaCompass = findViewById(R.id.cvQiblaCompass);
         cvNamesOfAllah = findViewById(R.id.cvNamesOfAllah);
         cvSettings = findViewById(R.id.cvSettings);
-    }
-
-    public void shareIntent() {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-        sendIntent.putExtra(Intent.EXTRA_TEXT,
-                "Let me recommed you this application\nhttps://play.google.com/store/apps/details?id=" +
-                        BuildConfig.APPLICATION_ID);
-        sendIntent.setType("text/plain");
-        startActivity(sendIntent);
     }
 
     private void checkPermission() {
@@ -177,31 +178,20 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void getHijriDate() {
-        ChronoFormatter<HijriCalendar> hijriFormat =
-                ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
-                        .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
-                        .addPattern(" MMMM yyyy", PatternType.CLDR)
-                        .build()
-                        .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
+        ChronoFormatter<HijriCalendar> hijriFormat = ChronoFormatter.setUp(HijriCalendar.family(), Locale.ENGLISH)
+                .addEnglishOrdinal(HijriCalendar.DAY_OF_MONTH)
+                .addPattern(" MMMM yyyy", PatternType.CLDR)
+                .build()
+                .withCalendarVariant(HijriCalendar.VARIANT_UMALQURA);
 
-// conversion from gregorian to hijri-umalqura valid at noon
-// (not really valid in the evening when next islamic day starts)
-        HijriCalendar today =
-                SystemClock.inLocalView().today().transform(
-                        HijriCalendar.class,
-                        HijriCalendar.VARIANT_UMALQURA
-                );
+        HijriCalendar today = SystemClock.inLocalView().today().transform(HijriCalendar.class, HijriCalendar.VARIANT_UMALQURA);
         System.out.println(hijriFormat.format(today)); // 22nd Rajab 1438
 
-// taking into account the specific start of day for Hijri calendar
-        HijriCalendar todayExact =
-                SystemClock.inLocalView().now(
-                        HijriCalendar.family(),
-                        HijriCalendar.VARIANT_UMALQURA,
-                        StartOfDay.EVENING // simple approximation => 18:00
-                ).toDate();
+        HijriCalendar todayExact = SystemClock.inLocalView()
+                .now(HijriCalendar.family(),
+                        HijriCalendar.VARIANT_UMALQURA, StartOfDay.EVENING).toDate();
         System.out.println(hijriFormat.format(todayExact)); // 22nd Rajab 1438 (23rd after 18:00)
-        tvHijriDate.setText("" + todayExact);
+        tvHijriDate.setText("" + hijriFormat.format(todayExact));
     }
 
 }
