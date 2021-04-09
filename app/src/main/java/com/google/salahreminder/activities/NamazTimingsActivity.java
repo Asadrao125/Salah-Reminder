@@ -29,6 +29,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.salahreminder.R;
 import com.google.salahreminder.utils.ExecutableService;
 import com.google.salahreminder.utils.GPSTracker;
+import com.google.salahreminder.utils.SharedPref;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -54,6 +55,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
     SharedPreferences prefs;
     long current_h, current_m;
     ImageView imgBack;
+    ImageView imgFajar, imgZuhar, imgAsar, imgMaghrib, imgISha;
     /* txt_View_Date, txt_View_Day */
     TextView tvSunrise, tvSunset, tvLocation1;
     TextView tvFajar, tvZuhar, tvAsar, tvMaghrib, tvIsha;
@@ -67,6 +69,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
         setContentView(R.layout.namaz_timings_layout);
 
         initialization();
+        SharedPref.init(this);
 
         Calendar calendar = Calendar.getInstance();
         y = String.valueOf(calendar.get(Calendar.YEAR));
@@ -138,6 +141,101 @@ public class NamazTimingsActivity extends AppCompatActivity {
             }
         });
 
+        imgFajar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (imgFajar.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.n_off).getConstantState()) {
+                    SharedPref.write("fajar", "yes");
+                    imgFajar.setImageResource(R.drawable.n_on);
+                } else {
+                    SharedPref.write("fajar", "no");
+                    imgFajar.setImageResource(R.drawable.n_off);
+                }
+            }
+        });
+
+        imgZuhar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (imgZuhar.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.n_off).getConstantState()) {
+                    SharedPref.write("zuhar", "yes");
+                    imgZuhar.setImageResource(R.drawable.n_on);
+                } else {
+                    SharedPref.write("zuhar", "no");
+                    imgZuhar.setImageResource(R.drawable.n_off);
+                }
+            }
+        });
+
+        imgAsar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (imgAsar.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.n_off).getConstantState()) {
+                    SharedPref.write("asar", "yes");
+                    imgAsar.setImageResource(R.drawable.n_on);
+                } else {
+                    SharedPref.write("asar", "no");
+                    imgAsar.setImageResource(R.drawable.n_off);
+                }
+            }
+        });
+
+        imgMaghrib.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (imgMaghrib.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.n_off).getConstantState()) {
+                    SharedPref.write("maghrib", "yes");
+                    imgMaghrib.setImageResource(R.drawable.n_on);
+                } else {
+                    SharedPref.write("maghrib", "no");
+                    imgMaghrib.setImageResource(R.drawable.n_off);
+                }
+            }
+        });
+
+        imgISha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (imgISha.getDrawable().getConstantState() == getResources().getDrawable(R.drawable.n_off).getConstantState()) {
+                    SharedPref.write("isha", "yes");
+                    imgISha.setImageResource(R.drawable.n_on);
+                } else {
+                    SharedPref.write("isha", "no");
+                    imgISha.setImageResource(R.drawable.n_off);
+                }
+            }
+        });
+
+        if (SharedPref.read("fajar", "").equals("yes")) {
+            imgFajar.setImageResource(R.drawable.n_on);
+        } else {
+            imgFajar.setImageResource(R.drawable.n_off);
+        }
+
+        if (SharedPref.read("zuhar", "").equals("yes")) {
+            imgZuhar.setImageResource(R.drawable.n_on);
+        } else {
+            imgZuhar.setImageResource(R.drawable.n_off);
+        }
+
+        if (SharedPref.read("asar", "").equals("yes")) {
+            imgAsar.setImageResource(R.drawable.n_on);
+        } else {
+            imgAsar.setImageResource(R.drawable.n_off);
+        }
+
+        if (SharedPref.read("maghrib", "").equals("yes")) {
+            imgMaghrib.setImageResource(R.drawable.n_on);
+        } else {
+            imgMaghrib.setImageResource(R.drawable.n_off);
+        }
+
+        if (SharedPref.read("isha", "").equals("yes")) {
+            imgISha.setImageResource(R.drawable.n_on);
+        } else {
+            imgISha.setImageResource(R.drawable.n_off);
+        }
+
     }
 
     @Override
@@ -181,8 +279,10 @@ public class NamazTimingsActivity extends AppCompatActivity {
                                 if (getApplicationContext() != null) {
                                     AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                                     Intent intent = new Intent(getApplicationContext(), ExecutableService.class);
+                                    intent.putExtra("val", "fajar");
 
                                     PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 109833, intent, 0);
+
                                     if (c.before(Calendar.getInstance())) {
                                         c.add(Calendar.DATE, 1);
                                     }
@@ -209,6 +309,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
                                 if (getApplicationContext() != null) {
                                     AlarmManager alarmManager_zuhar = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                                     Intent intent_zuhar = new Intent(getApplicationContext(), ExecutableService.class);
+                                    intent_zuhar.putExtra("val", "zuhar");
 
                                     PendingIntent pendingIntent_zuhar = PendingIntent.getBroadcast(getApplicationContext(), 675483, intent_zuhar, 0);
                                     if (c2.before(Calendar.getInstance())) {
@@ -237,6 +338,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
                                 if (getApplicationContext() != null) {
                                     AlarmManager alarmManager_asar = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                                     Intent intent_asar = new Intent(getApplicationContext(), ExecutableService.class);
+                                    intent_asar.putExtra("val", "asar");
 
                                     PendingIntent pendingIntent_asar = PendingIntent.getBroadcast(getApplicationContext(), 768564, intent_asar, 0);
                                     if (c3.before(Calendar.getInstance())) {
@@ -265,6 +367,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
                                 if (getApplicationContext() != null) {
                                     AlarmManager alarmManager_maghrib = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                                     Intent intent_maghrib = new Intent(getApplicationContext(), ExecutableService.class);
+                                    intent_maghrib.putExtra("val", "maghrib");
 
                                     PendingIntent pendingIntent_zuhar = PendingIntent.getBroadcast(getApplicationContext(), 980324, intent_maghrib, 0);
                                     if (c4.before(Calendar.getInstance())) {
@@ -292,6 +395,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
                                 if (getApplicationContext() != null) {
                                     AlarmManager alarmManager_isha = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
                                     Intent intent_isha = new Intent(getApplicationContext(), ExecutableService.class);
+                                    intent_isha.putExtra("val", "isha");
 
                                     PendingIntent pendingIntent_isha = PendingIntent.getBroadcast(getApplicationContext(), 764687, intent_isha, 0);
                                     if (c5.before(Calendar.getInstance())) {
@@ -368,8 +472,11 @@ public class NamazTimingsActivity extends AppCompatActivity {
         tvAsar = findViewById(R.id.tvAsar);
         tvMaghrib = findViewById(R.id.tvMaghrib);
         tvIsha = findViewById(R.id.tvIsha);
-        //txt_View_Date = findViewById(R.id.txt_View_Date);
-        //txt_View_Day = findViewById(R.id.txt_View_Day);
+        imgFajar = findViewById(R.id.imgFajar);
+        imgZuhar = findViewById(R.id.imgZuhar);
+        imgAsar = findViewById(R.id.imgAsar);
+        imgMaghrib = findViewById(R.id.imgMaghrib);
+        imgISha = findViewById(R.id.imgIsha);
         tvSunrise = findViewById(R.id.tv_sunrise);
         tvSunset = findViewById(R.id.tv_sunset);
         fajar_fajar = findViewById(R.id.fajar);

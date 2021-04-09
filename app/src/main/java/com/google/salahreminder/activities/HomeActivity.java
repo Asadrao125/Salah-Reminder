@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.google.salahreminder.AdsManager.SingletonAds;
 import com.google.salahreminder.R;
 import com.google.salahreminder.utils.GPSTracker;
+import com.google.salahreminder.utils.SharedPref;
 import com.karumi.dexter.BuildConfig;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -56,6 +57,12 @@ public class HomeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         init();
+        SharedPref.init(this);
+        SharedPref.write("fajar", "no");
+        SharedPref.write("zuhar", "no");
+        SharedPref.write("asar", "no");
+        SharedPref.write("maghrib", "no");
+        SharedPref.write("isha", "no");
 
         /*SingletonAds.Companion.init(getApplicationContext());
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
@@ -106,9 +113,7 @@ public class HomeActivity extends AppCompatActivity {
         imgAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                com.google.salahreminder.tasbeeh_files.AboutDialog aboutDialog = new
-                        com.google.salahreminder.tasbeeh_files.AboutDialog(HomeActivity.this);
-                aboutDialog.show(getSupportFragmentManager(), "about dialog");
+                shareIntent();
             }
         });
 
@@ -139,6 +144,20 @@ public class HomeActivity extends AppCompatActivity {
 
         getHijriDate();
 
+    }
+
+    public void shareIntent() {
+        try {
+            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+            shareIntent.setType("text/plain");
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Namaz Timings");
+            String shareMessage = "\nLet me recommend you this application\n\n";
+            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID;
+            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+            startActivity(Intent.createChooser(shareIntent, "choose one"));
+        } catch (Exception e) {
+            //e.toString();
+        }
     }
 
     private void init() {
@@ -193,5 +212,4 @@ public class HomeActivity extends AppCompatActivity {
         System.out.println(hijriFormat.format(todayExact)); // 22nd Rajab 1438 (23rd after 18:00)
         tvHijriDate.setText("" + hijriFormat.format(todayExact));
     }
-
 }
