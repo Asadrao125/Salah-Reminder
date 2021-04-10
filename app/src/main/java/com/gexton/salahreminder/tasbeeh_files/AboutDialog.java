@@ -1,20 +1,17 @@
-package com.google.salahreminder.tasbeeh_files;
+package com.gexton.salahreminder.tasbeeh_files;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.widget.Toast;
 
-import com.google.salahreminder.R;
-import com.google.salahreminder.activities.TasbeehActivity;
+import com.gexton.salahreminder.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
-import static com.google.salahreminder.BuildConfig.VERSION_NAME;
+import static com.gexton.salahreminder.BuildConfig.VERSION_NAME;
 
 public class AboutDialog extends AppCompatDialogFragment {
 

@@ -1,9 +1,9 @@
-package com.google.salahreminder.utils;
+package com.gexton.salahreminder.utils;
 
 import android.content.Context;
 import android.media.MediaPlayer;
 
-import com.google.salahreminder.R;
+import com.gexton.salahreminder.R;
 
 public class AzanControl {
 

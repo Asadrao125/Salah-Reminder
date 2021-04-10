@@ -1,4 +1,4 @@
-package com.google.salahreminder.tasbeeh_files;
+package com.gexton.salahreminder.tasbeeh_files;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.NumberPicker;
 
-import com.google.salahreminder.R;
-import com.google.salahreminder.activities.TasbeehActivity;
+import com.gexton.salahreminder.R;
+import com.gexton.salahreminder.activities.TasbeehActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;

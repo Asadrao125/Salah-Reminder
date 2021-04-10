@@ -1,4 +1,4 @@
-package com.google.salahreminder.AdsManager
+package com.gexton.salahreminder.AdsManager
 
 import android.content.Context
 import android.util.DisplayMetrics

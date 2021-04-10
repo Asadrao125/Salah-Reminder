@@ -1,10 +1,8 @@
-package com.google.salahreminder.utils;
+package com.gexton.salahreminder.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-
-import com.google.salahreminder.utils.AzanControl;
 
 public class Reciever extends BroadcastReceiver {
 

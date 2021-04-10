@@ -1,4 +1,4 @@
-package com.google.salahreminder.activities;
+package com.gexton.salahreminder.activities;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -20,14 +20,19 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.gexton.salahreminder.AdsManager.SingletonAds;
+import com.gexton.salahreminder.R;
+import com.gexton.salahreminder.tasbeeh_files.AboutDialog;
+import com.gexton.salahreminder.tasbeeh_files.NotificationBuilder;
+import com.gexton.salahreminder.tasbeeh_files.ResetDialog;
+import com.gexton.salahreminder.tasbeeh_files.SetTargetPicker;
 import com.google.android.material.snackbar.Snackbar;
-import com.google.salahreminder.R;
-import com.google.salahreminder.tasbeeh_files.ResetDialog;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -40,7 +45,7 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import static com.google.salahreminder.tasbeeh_files.NotificationBuilder.CHANNEL_ID_1;
+import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
 
 public class TasbeehActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
     private static final String S_MAIN_COUNT = "mainCount"; //utk SharedPreference
@@ -84,6 +89,10 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         setSupportActionBar(toolbar);
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         imgBack = findViewById(R.id.imgBack);
+
+        SingletonAds.Companion.init(this);
+        FrameLayout banner_container = findViewById(R.id.ad_view_container);
+        showBanner(this, banner_container);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -272,7 +281,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     }
 
     public void openAboutDialog() {
-        com.google.salahreminder.tasbeeh_files.AboutDialog aboutDialog = new com.google.salahreminder.tasbeeh_files.AboutDialog(this);
+        AboutDialog aboutDialog = new AboutDialog(this);
         aboutDialog.show(getSupportFragmentManager(), "about dialog");
     }
 
@@ -323,7 +332,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     }
 
     public void openTargetDialog() {
-        com.google.salahreminder.tasbeeh_files.SetTargetPicker newFragment = new com.google.salahreminder.tasbeeh_files.SetTargetPicker();
+        SetTargetPicker newFragment = new SetTargetPicker();
         newFragment.setValueChangeListener(this);
         newFragment.show(getSupportFragmentManager(), "target picker");
     }
@@ -390,7 +399,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         PendingIntent contentIntent = PendingIntent.getActivity(this,
                 0, activityIntent, 0);
 
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID_1)
+        Notification notification = new NotificationCompat.Builder(this, NotificationBuilder.CHANNEL_ID_1)
                 .setSmallIcon(R.mipmap.ic_launcher)
                 .setContentTitle(title)
                 .setContentText(String.valueOf(countZikr))

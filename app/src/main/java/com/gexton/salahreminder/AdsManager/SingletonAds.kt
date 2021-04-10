@@ -1,8 +1,8 @@
-package com.google.salahreminder.AdsManager
+package com.gexton.salahreminder.AdsManager
 
 import android.content.Context
 import com.google.android.gms.ads.*
-import com.google.salahreminder.R
+import com.gexton.salahreminder.R
 
 
 class SingletonAds private constructor(context: Context) {

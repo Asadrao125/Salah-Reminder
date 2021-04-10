@@ -1,17 +1,21 @@
-package com.google.salahreminder.activities;
+package com.gexton.salahreminder.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.google.salahreminder.R;
+import com.gexton.salahreminder.AdsManager.SingletonAds;
+import com.gexton.salahreminder.R;
+import com.gexton.salahreminder.tasbeeh_files.AboutDialog;
 import com.karumi.dexter.BuildConfig;
+
+import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
 
 public class SettingsActivity extends AppCompatActivity {
     ImageView imgBack;
@@ -25,6 +29,10 @@ public class SettingsActivity extends AppCompatActivity {
         imgBack = findViewById(R.id.imgBack);
         share_to_friend = findViewById(R.id.share_to_friend);
         rate_us = findViewById(R.id.rate_us);
+
+        SingletonAds.Companion.init(this);
+        FrameLayout banner_container = findViewById(R.id.ad_view_container);
+        showBanner(this, banner_container);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -68,7 +76,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void openAboutDialog() {
-        com.google.salahreminder.tasbeeh_files.AboutDialog aboutDialog = new com.google.salahreminder.tasbeeh_files.AboutDialog(this);
+        AboutDialog aboutDialog = new AboutDialog(this);
         aboutDialog.show(getSupportFragmentManager(), "about dialog");
     }
 

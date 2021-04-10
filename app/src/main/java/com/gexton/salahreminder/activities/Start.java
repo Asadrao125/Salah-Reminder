@@ -1,4 +1,4 @@
-package com.google.salahreminder.activities;
+package com.gexton.salahreminder.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,12 +8,15 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.os.PowerManager;
 
-import com.google.salahreminder.R;
+import com.gexton.salahreminder.AdsManager.SingletonAds;
+import com.gexton.salahreminder.R;
+
+import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
 
 
 public class Start extends Activity {
@@ -351,6 +354,10 @@ public class Start extends Activity {
                 startActivity(new Intent(Start.this, HomeActivity.class));
             }
         });
+
+        SingletonAds.Companion.init(Start.this);
+        FrameLayout banner_container = findViewById(R.id.ad_view_container);
+        showBanner(Start.this, banner_container);
 
         this.handler = new Handler();
         Runnable checkTime = new C02331();

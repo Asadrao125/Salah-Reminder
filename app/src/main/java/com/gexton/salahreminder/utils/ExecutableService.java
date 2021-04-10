@@ -1,11 +1,9 @@
-package com.google.salahreminder.utils;
+package com.gexton.salahreminder.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.text.TextUtils;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 

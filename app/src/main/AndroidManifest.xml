@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.google.salahreminder">
+    package="com.gexton.salahreminder">
 
     <application
         android:allowBackup="true"
@@ -9,29 +9,29 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.SettingsActivity"/>
-        <activity android:name=".activities.Start" />
-        <activity android:name=".activities.QiblaCompassActivity" />
-        <activity android:name=".activities.ZakaatCalculator" />
-        <activity android:name=".activities.TasbeehActivity" />
-        <activity android:name=".activities.HomeActivity">
+        <activity android:name="com.gexton.salahreminder.activities.SettingsActivity"/>
+        <activity android:name="com.gexton.salahreminder.activities.Start" />
+        <activity android:name="com.gexton.salahreminder.activities.QiblaCompassActivity" />
+        <activity android:name="com.gexton.salahreminder.activities.ZakaatCalculator" />
+        <activity android:name="com.gexton.salahreminder.activities.TasbeehActivity" />
+        <activity android:name="com.gexton.salahreminder.activities.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.NamazTimingsActivity" />
+        <activity android:name="com.gexton.salahreminder.activities.NamazTimingsActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />
 
         <receiver
-            android:name=".utils.ExecutableService"
+            android:name="com.gexton.salahreminder.utils.ExecutableService"
             android:enabled="true" />
         <receiver
-            android:name=".utils.Reciever"
+            android:name="com.gexton.salahreminder.utils.Reciever"
             android:enabled="true" />
     </application>
 

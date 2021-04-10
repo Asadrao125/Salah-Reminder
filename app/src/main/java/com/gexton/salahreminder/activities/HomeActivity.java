@@ -1,4 +1,4 @@
-package com.google.salahreminder.activities;
+package com.gexton.salahreminder.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -9,17 +9,17 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.salahreminder.AdsManager.SingletonAds;
-import com.google.salahreminder.R;
-import com.google.salahreminder.utils.GPSTracker;
-import com.google.salahreminder.utils.SharedPref;
+import com.gexton.salahreminder.AdsManager.SingletonAds;
+import com.gexton.salahreminder.R;
+import com.gexton.salahreminder.utils.GPSTracker;
+import com.gexton.salahreminder.utils.SharedPref;
 import com.karumi.dexter.BuildConfig;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
@@ -40,8 +40,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.google.salahreminder.AdsManager.AdsKt.showBanner;
-import static com.google.salahreminder.AdsManager.AdsKt.showInterstitial;
+import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
 
 public class HomeActivity extends AppCompatActivity {
     GPSTracker gpsTracker;
@@ -58,15 +57,17 @@ public class HomeActivity extends AppCompatActivity {
 
         init();
         SharedPref.init(this);
-        SharedPref.write("fajar", "no");
-        SharedPref.write("zuhar", "no");
-        SharedPref.write("asar", "no");
-        SharedPref.write("maghrib", "no");
-        SharedPref.write("isha", "no");
+        if (TextUtils.isEmpty(SharedPref.read("fajar", ""))) {
+            SharedPref.write("fajar", "no");
+            SharedPref.write("zuhar", "no");
+            SharedPref.write("asar", "no");
+            SharedPref.write("maghrib", "no");
+            SharedPref.write("isha", "no");
+        }
 
-        /*SingletonAds.Companion.init(getApplicationContext());
+        SingletonAds.Companion.init(this);
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
-        showBanner(HomeActivity.this, banner_container);*/
+        showBanner(HomeActivity.this, banner_container);
 
         cvNamazTimings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -132,10 +133,10 @@ public class HomeActivity extends AppCompatActivity {
             try {
                 addresses = geocoder.getFromLocation(gpsTracker.getLatitude(), gpsTracker.getLongitude(), 1);
                 address = addresses.get(0).getAddressLine(0);
-                Log.d("Location_Address", "onLocationChanged: " + address);
+                Log.d("city_country", "onLocationChanged: " + address);
                 String city = addresses.get(0).getLocality();
                 String country = addresses.get(0).getCountryName();
-                tvLocation1.setText(city + " " + country);
+                tvLocation1.setText(city + ", " + country);
             } catch (
                     IOException e) {
                 e.printStackTrace();
@@ -156,12 +157,12 @@ public class HomeActivity extends AppCompatActivity {
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "choose one"));
         } catch (Exception e) {
-            //e.toString();
+
         }
     }
 
     private void init() {
-        gpsTracker = new GPSTracker();
+        gpsTracker = new GPSTracker(getApplicationContext());
         imgAbout = findViewById(R.id.imgAbout);
         c_time = findViewById(R.id.c_time);
         tvLocation1 = findViewById(R.id.tvLocation1);

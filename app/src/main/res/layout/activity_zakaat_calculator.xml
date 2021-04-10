@@ -1,93 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/setting"
-    tools:context=".activities.ZakaatCalculator">
+    android:orientation="vertical"
+    tools:context="com.gexton.salahreminder.activities.ZakaatCalculator">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:theme="@style/ToolBarTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/app_color">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:theme="@style/ToolBarTheme"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/app_color">
+            android:orientation="horizontal">
+
+            <ImageView
+                android:padding="10dp"
+                android:layout_marginRight="10dp"
+                android:src="@drawable/ic_back"
+                android:layout_width="wrap_content"
+                android:id="@+id/imgBack"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Zakaat Calculator"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp" />
+
+        </LinearLayout>
+
+    </androidx.appcompat.widget.Toolbar>
+
+    <ScrollView
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <LinearLayout
+                android:layout_margin="20dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:padding="10dp"
-                    android:layout_marginRight="10dp"
-                    android:src="@drawable/ic_back"
-                    android:layout_width="wrap_content"
-                    android:id="@+id/imgBack"
-                    android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
                 <TextView
-                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Zakaat Calculator"
+                    android:text="Zakaat Value"
+                    android:id="@+id/tvZakaatValue"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_gravity="center"
+                    android:textSize="18sp"
+                    android:visibility="gone"
+                    android:textColor="@color/app_color"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dp"
+                        android:hint="Enter Amount"
+                        android:inputType="number" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="Calculate"
                     android:textColor="@color/colorWhite"
-                    android:textSize="18sp" />
+                    android:background="@drawable/button_border"
+                    android:id="@+id/btnCalculate"/>
 
             </LinearLayout>
 
-        </androidx.appcompat.widget.Toolbar>
+        </LinearLayout>
 
-      <LinearLayout
-          android:layout_margin="20dp"
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:orientation="vertical">
+    </ScrollView>
 
-          <TextView
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Zakaat Value"
-              android:id="@+id/tvZakaatValue"
-              android:layout_marginTop="20dp"
-              android:layout_marginBottom="20dp"
-              android:layout_gravity="center"
-              android:textSize="18sp"
-              android:visibility="gone"
-              android:textColor="@color/app_color"/>
+     <FrameLayout
+         android:layout_alignParentBottom="true"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:id="@+id/ad_view_container"/>
 
-          <com.google.android.material.textfield.TextInputLayout
-              style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content">
-
-              <EditText
-                  android:id="@+id/edtAmount"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:drawablePadding="10dp"
-                  android:hint="Enter Amount"
-                  android:inputType="number" />
-
-          </com.google.android.material.textfield.TextInputLayout>
-
-          <Button
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_marginTop="20dp"
-              android:text="Calculate"
-              android:textColor="@color/colorWhite"
-              android:background="@drawable/button_border"
-              android:id="@+id/btnCalculate"/>
-
-      </LinearLayout>
-
-    </LinearLayout>
-
-</ScrollView>
+</RelativeLayout>

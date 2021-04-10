@@ -1,4 +1,4 @@
-package com.google.salahreminder.utils;
+package com.gexton.salahreminder.utils;
 
 import android.app.Activity;
 import android.content.Context;

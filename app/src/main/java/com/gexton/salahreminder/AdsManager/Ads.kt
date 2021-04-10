@@ -1,12 +1,12 @@
-package com.google.salahreminder.AdsManager
+package com.gexton.salahreminder.AdsManager
 
 import android.content.Context
 import android.widget.FrameLayout
+import com.gexton.salahreminder.R
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
-import com.google.salahreminder.R
 import java.util.*
 
 

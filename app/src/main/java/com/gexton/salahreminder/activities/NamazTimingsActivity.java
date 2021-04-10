@@ -1,4 +1,4 @@
-package com.google.salahreminder.activities;
+package com.gexton.salahreminder.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,6 +16,7 @@ import android.os.Handler;
 import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,10 +27,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.salahreminder.R;
-import com.google.salahreminder.utils.ExecutableService;
-import com.google.salahreminder.utils.GPSTracker;
-import com.google.salahreminder.utils.SharedPref;
+import com.gexton.salahreminder.AdsManager.SingletonAds;
+import com.gexton.salahreminder.R;
+import com.gexton.salahreminder.utils.SharedPref;
+import com.gexton.salahreminder.utils.ExecutableService;
+import com.gexton.salahreminder.utils.GPSTracker;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -49,6 +51,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
+
+import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
 
 public class NamazTimingsActivity extends AppCompatActivity {
     GPSTracker gpsTracker;
@@ -70,6 +74,9 @@ public class NamazTimingsActivity extends AppCompatActivity {
 
         initialization();
         SharedPref.init(this);
+        SingletonAds.Companion.init(this);
+        FrameLayout banner_container = findViewById(R.id.ad_view_container);
+        showBanner(this, banner_container);
 
         Calendar calendar = Calendar.getInstance();
         y = String.valueOf(calendar.get(Calendar.YEAR));
@@ -511,7 +518,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
                             getResponse(address);
                             String city = addresses.get(0).getLocality();
                             String country = addresses.get(0).getCountryName();
-                            tvLocation1.setText(city + " " + country);
+                            tvLocation1.setText(city + ", " + country);
                         } catch (
                                 IOException e) {
                             e.printStackTrace();

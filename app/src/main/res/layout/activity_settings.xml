@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/setting"
-    tools:context=".activities.SettingsActivity">
+    tools:context="com.gexton.salahreminder.activities.SettingsActivity">
 
     <LinearLayout
         android:id="@+id/toolbar_lay"
@@ -35,6 +35,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:id="@+id/scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar_lay">
@@ -124,5 +125,11 @@
         </RelativeLayout>
 
     </ScrollView>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ad_view_container"/>
 
 </RelativeLayout>

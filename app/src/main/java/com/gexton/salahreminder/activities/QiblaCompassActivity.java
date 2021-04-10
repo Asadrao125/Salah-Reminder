@@ -1,4 +1,4 @@
-package com.google.salahreminder.activities;
+package com.gexton.salahreminder.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,14 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.google.salahreminder.R;
+import com.gexton.salahreminder.AdsManager.SingletonAds;
+import com.gexton.salahreminder.R;
+
+import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
 
 public class QiblaCompassActivity extends AppCompatActivity implements SensorEventListener {
     ImageView imgBack;
@@ -32,6 +36,10 @@ public class QiblaCompassActivity extends AppCompatActivity implements SensorEve
         ivCompass = findViewById(R.id.ivCompass);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+
+        SingletonAds.Companion.init(this);
+        FrameLayout banner_container = findViewById(R.id.ad_view_container);
+        showBanner(this, banner_container);
 
         if (sensor != null) {
             sensorManager.registerListener((SensorEventListener) this, sensor, SensorManager.SENSOR_DELAY_FASTEST);

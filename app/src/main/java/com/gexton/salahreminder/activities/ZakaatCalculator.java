@@ -1,18 +1,20 @@
-package com.google.salahreminder.activities;
+package com.gexton.salahreminder.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.Image;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.salahreminder.R;
+import com.gexton.salahreminder.AdsManager.SingletonAds;
+import com.gexton.salahreminder.R;
+
+import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
 
 public class ZakaatCalculator extends AppCompatActivity {
     Button btnCalculate;
@@ -29,6 +31,10 @@ public class ZakaatCalculator extends AppCompatActivity {
         edtAmount = findViewById(R.id.edtAmount);
         tvZakaatValue = findViewById(R.id.tvZakaatValue);
         imgBack = findViewById(R.id.imgBack);
+
+        SingletonAds.Companion.init(this);
+        FrameLayout banner_container = findViewById(R.id.ad_view_container);
+        showBanner(this, banner_container);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

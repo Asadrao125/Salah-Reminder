@@ -1,4 +1,4 @@
-package com.google.salahreminder.utils;
+package com.gexton.salahreminder.utils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

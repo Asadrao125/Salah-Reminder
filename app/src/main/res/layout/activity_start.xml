@@ -1,11 +1,11 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/setting"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context=".activities.Start">
+    tools:context="com.gexton.salahreminder.activities.Start">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -39,17 +39,18 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-    <LinearLayout
+    <RelativeLayout
+        android:layout_below="@id/toolbar"
+        android:id="@+id/mainLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:orientation="vertical"
         android:padding="5dp">
 
         <ImageView
             android:id="@+id/picture"
             android:background="@drawable/a0"
             android:layout_width="300dp"
+            android:layout_centerInParent="true"
             android:layout_height="300dp"
             android:layout_gravity="center"/>
 
@@ -81,6 +82,12 @@
             android:layout_below="@+id/Meaning"
             android:text="" />
 
-    </LinearLayout>
+    </RelativeLayout>
 
-</LinearLayout>
+    <FrameLayout
+        android:id="@+id/ad_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

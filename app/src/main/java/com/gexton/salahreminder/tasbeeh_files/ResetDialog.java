@@ -1,12 +1,12 @@
-package com.google.salahreminder.tasbeeh_files;
+package com.gexton.salahreminder.tasbeeh_files;
 
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
-import com.google.salahreminder.R;
-import com.google.salahreminder.activities.TasbeehActivity;
+import com.gexton.salahreminder.R;
+import com.gexton.salahreminder.activities.TasbeehActivity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
