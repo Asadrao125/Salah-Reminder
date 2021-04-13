@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.activities;
+package com.gexton.namazalert.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -16,11 +16,12 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gexton.salahreminder.AdsManager.SingletonAds;
-import com.gexton.salahreminder.R;
-import com.gexton.salahreminder.utils.GPSTracker;
-import com.gexton.salahreminder.utils.SharedPref;
-import com.karumi.dexter.BuildConfig;
+import com.gexton.namazalert.AdsManager.SingletonAds;
+import com.gexton.namazalert.BuildConfig;
+import com.gexton.namazalert.R;
+import com.gexton.namazalert.utils.GPSTracker;
+import com.gexton.namazalert.utils.SharedPref;
+
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -40,7 +41,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
+import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 public class HomeActivity extends AppCompatActivity {
     GPSTracker gpsTracker;

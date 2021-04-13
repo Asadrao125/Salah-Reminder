@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:588699496190:android:d1589adb7071f91861bfaf",
         "android_client_info": {
-          "package_name": "com.google.salahreminder"
+          "package_name": "com.gexton.namazalert"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "588699496190-ad5fckajs538ant0g7bnkmvn55pu1m5j.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.google.salahreminder",
+            "package_name": "com.gexton.namazalert",
             "certificate_hash": "181fc858ea87201aade631f1c8bbd8c7da884e18"
           }
         },

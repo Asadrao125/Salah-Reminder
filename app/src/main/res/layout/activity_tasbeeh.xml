@@ -5,9 +5,10 @@
     android:id="@+id/parent_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorWhite"
+    android:background="@drawable/setting"
     android:orientation="vertical"
-    tools:context="com.gexton.salahreminder.activities.TasbeehActivity">
+
+    tools:context="com.gexton.namazalert.activities.TasbeehActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
@@ -41,136 +42,239 @@
 
     </androidx.appcompat.widget.Toolbar>
 
-  <ScrollView
-      android:layout_above="@id/ad_view_container"
-      android:id="@+id/scroll_view"
-      android:layout_below="@id/toolbar"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent">
+    <ScrollView
+        android:layout_above="@id/ad_view_container"
+        android:id="@+id/scroll_view"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="vertical">
+        <LinearLayout
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-          <FrameLayout
-              android:layout_gravity="center"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:layout_margin="20dp">
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                app:cardElevation="10dp"
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="15dp">
+                <LinearLayout
+                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="20dp">
 
-              <RelativeLayout
-                  android:layout_gravity="center"
-                  android:id="@+id/targetLayout"
-                  android:layout_width="200dp"
-                  android:layout_height="200dp"
-                  android:orientation="vertical">
 
-                  <TextView
-                      android:fontFamily="@font/digital"
-                      android:id="@+id/text_zikr"
-                      android:layout_width="wrap_content"
-                      android:layout_height="wrap_content"
-                      android:text="0"
-                      android:layout_centerInParent="true"
-                      android:textColor="#0aa653"
-                      android:layout_marginBottom="20dp"
-                      android:textAlignment="center"
-                      android:textSize="80sp" />
+                    <FrameLayout
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        >
 
-              </RelativeLayout>
+                        <RelativeLayout
+                            android:layout_gravity="center"
+                            android:id="@+id/targetLayout"
+                            android:layout_width="200dp"
+                            android:layout_height="200dp"
+                            android:orientation="vertical">
 
-              <ProgressBar
-                  android:id="@+id/pb"
-                  android:layout_width="253dp"
-                  android:layout_height="253dp"
-                  android:layout_gravity="center"
-                  android:indeterminate="false"
-                  android:progressDrawable="@drawable/circular_progress_bar"
-                  android:background="@drawable/circle_shape"
-                  style="?android:attr/progressBarStyleHorizontal"
-                  android:max="100"
-                  android:progress="65" />
+                            <TextView
+                                android:fontFamily="@font/digital"
+                                android:id="@+id/text_zikr"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="0"
+                                android:layout_centerInParent="true"
+                                android:textColor="#0aa653"
+                                android:layout_marginBottom="20dp"
+                                android:textAlignment="center"
+                                android:textSize="80sp" />
 
-          </FrameLayout>
+                        </RelativeLayout>
 
-          <TextView
-              android:layout_gravity="center"
-              android:textSize="18sp"
-              android:textColor="#000"
-              android:id="@+id/textView_progress_target"
-              android:layout_width="wrap_content"
-              android:layout_height="wrap_content"
-              android:text="Target" />
+                        <ProgressBar
+                            android:id="@+id/pb"
+                            android:layout_width="253dp"
+                            android:layout_height="253dp"
+                            android:layout_gravity="center"
+                            android:indeterminate="false"
+                            android:progressDrawable="@drawable/circular_progress_bar"
+                            android:background="@drawable/circle_shape"
+                            style="?android:attr/progressBarStyleHorizontal"
+                            android:max="100"
+                            android:progress="65"
 
-          <RelativeLayout
-              android:layout_width="match_parent"
-              android:layout_height="wrap_content"
-              android:layout_margin="20dp">
+                            android:outlineSpotShadowColor="@android:color/black"/>
 
-              <LinearLayout
-                  android:layout_marginTop="20dp"
-                  android:gravity="center"
-                  android:layout_below="@+id/textView_cummulative_count"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:orientation="horizontal">
+                    </FrameLayout>
 
-                  <Button
-                      android:layout_marginRight="20dp"
-                      android:id="@+id/button_count"
-                      android:layout_width="150dp"
-                      android:layout_height="wrap_content"
-                      android:background="@drawable/button_border"
-                      android:textColor="@color/colorWhite"
-                      android:layout_above="@+id/button_reset"
-                      android:text="Start"
-                      android:textStyle="italic" />
 
-                  <Button
-                      android:id="@+id/button_reset"
-                      android:layout_width="150dp"
-                      android:layout_height="wrap_content"
-                      android:text="Reset"
-                      android:background="@drawable/button_border"
-                      android:textColor="@color/colorWhite" />
 
-              </LinearLayout>
 
-              <ProgressBar
-                  android:visibility="gone"
-                  android:layout_marginBottom="20dp"
-                  android:id="@+id/progressBar"
-                  style="?android:attr/progressBarStyleHorizontal"
-                  android:layout_width="match_parent"
-                  android:layout_height="wrap_content"
-                  android:max="10"
-                  android:progress="0" />
 
-              <TextView
-                  android:id="@+id/textView_cummulative_count"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:layout_below="@+id/progressBar"
-                  android:layout_centerHorizontal="true"
-                  android:text="Round: 0" />
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="10dp"
+                        app:cardUseCompatPadding="true"
+                        app:cardCornerRadius="15dp"
+                        app:cardBackgroundColor="#FBFBFB"
+                        android:layout_marginTop="-10dp">
 
-          </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            >
 
-          <!--<ProgressBar
-              android:id="@+id/pb"
-              android:layout_width="200dp"
-              android:layout_height="200dp"
-              android:indeterminate="false"
-              android:progressDrawable="@drawable/circular_progress_bar"
-              android:background="@drawable/circle_shape"
-              style="?android:attr/progressBarStyleHorizontal"
-              android:max="100"
-              android:progress="65" />-->
+                            <TextView
+                                android:layout_gravity="center"
+                                android:id="@+id/textView_progress_target"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Target : 33"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:textColor="#252323"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
 
-      </LinearLayout>
+                            <View
+                                android:layout_width="1px"
+                                android:layout_height="match_parent"
+                                android:background="@android:color/darker_gray"/>
 
-  </ScrollView>
+                            <TextView
+                                android:id="@+id/textView_cummulative_count"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="wrap_content"
+                                android:text="Round: 0"
+                                android:gravity="center"
+                                android:padding="10dp"
+                                android:textColor="#252323"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                        </LinearLayout>
+
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <!-- <View
+                         android:layout_width="match_parent"
+                         android:layout_height="1px"
+                         android:background="@android:color/darker_gray"/>
+                     <View
+                         android:layout_width="match_parent"
+                         android:layout_height="1px"
+                         android:background="@android:color/darker_gray"/>-->
+
+                    <!--<ProgressBar
+                        android:visibility="gone"
+                        android:layout_marginBottom="20dp"
+                        android:id="@+id/progressBar"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:max="10"
+                        android:progress="0" />-->
+
+                    <LinearLayout
+                        android:gravity="center"
+                        android:layout_below="@+id/textView_cummulative_count"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="-10dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="10dp"
+                            app:cardUseCompatPadding="true"
+                            app:cardCornerRadius="15dp">
+                            <Button
+                                android:id="@+id/button_count"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/btn_green"
+                                android:textColor="@color/colorWhite"
+                                android:text="Start"
+                                android:textStyle="italic"
+                                android:textAllCaps="false"
+                                android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="wrap_content"
+                            app:cardElevation="10dp"
+                            app:cardUseCompatPadding="true"
+                            app:cardCornerRadius="15dp">
+                        <Button
+                            android:id="@+id/button_reset"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Reset"
+                            android:background="@drawable/btn_grey"
+                            android:textColor="@color/colorWhite"
+                            android:textAllCaps="false"
+                            android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        </androidx.cardview.widget.CardView>
+
+                    </LinearLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:cardElevation="10dp"
+                        app:cardUseCompatPadding="true"
+                        app:cardCornerRadius="15dp"
+                        android:layout_marginTop="-13dp">
+                    <Button
+                        android:id="@+id/button_SetTarget"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Set Target"
+                        android:background="@drawable/btn_green_light"
+                        android:textColor="@android:color/black"
+                        android:textAllCaps="false"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+                    <!--<ProgressBar
+                        android:id="@+id/pb"
+                        android:layout_width="200dp"
+                        android:layout_height="200dp"
+                        android:indeterminate="false"
+                        android:progressDrawable="@drawable/circular_progress_bar"
+                        android:background="@drawable/circle_shape"
+                        style="?android:attr/progressBarStyleHorizontal"
+                        android:max="100"
+                        android:progress="65" />-->
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <FrameLayout
         android:layout_alignParentBottom="true"

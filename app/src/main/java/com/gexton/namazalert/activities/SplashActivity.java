@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.activities;
+package com.gexton.namazalert.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.gexton.salahreminder.R;
+import com.gexton.namazalert.R;
 
 public class SplashActivity extends AppCompatActivity {
     private final int SPLASH_DISPLAY_LENGTH = 500;

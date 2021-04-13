@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.gexton.salahreminder">
+    package="com.gexton.namazalert">
 
     <application
         android:allowBackup="true"
@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".activities.SplashActivity">
+        <activity android:name="com.gexton.namazalert.activities.SplashActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,24 +19,24 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".activities.SettingsActivity" />
-        <activity android:name=".names_list.ListData" />
-        <activity android:name=".activities.Start" />
-        <activity android:name=".activities.QiblaCompassActivity" />
-        <activity android:name=".activities.ZakaatCalculator" />
-        <activity android:name=".activities.TasbeehActivity" />
-        <activity android:name=".activities.HomeActivity" />
-        <activity android:name=".activities.NamazTimingsActivity" />
+        <activity android:name="com.gexton.namazalert.activities.SettingsActivity" />
+        <activity android:name="com.gexton.namazalert.names_list.ListData" />
+        <activity android:name="com.gexton.namazalert.activities.Start" />
+        <activity android:name="com.gexton.namazalert.activities.QiblaCompassActivity" />
+        <activity android:name="com.gexton.namazalert.activities.ZakaatCalculator" />
+        <activity android:name="com.gexton.namazalert.activities.TasbeehActivity" />
+        <activity android:name="com.gexton.namazalert.activities.HomeActivity" />
+        <activity android:name="com.gexton.namazalert.activities.NamazTimingsActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />
 
         <receiver
-            android:name=".utils.ExecutableService"
+            android:name="com.gexton.namazalert.utils.ExecutableService"
             android:enabled="true" />
         <receiver
-            android:name=".utils.Reciever"
+            android:name="com.gexton.namazalert.utils.Reciever"
             android:enabled="true" />
     </application>
 

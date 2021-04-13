@@ -2,11 +2,19 @@
     <string name="app_name">Namaz Alert</string>
     <string name="channel_name">chanel_name</string>
     <string name="fajar">Fajar:</string>
-    <string name="admob_app_id">ca-app-pub-2137792542799325~6269926192</string>
-    <string name="admob_banner_id">ca-app-pub-2137792542799325/8764776338</string>
+
+    <!-- OLD ID's -->
+    <!--<string name="admob_app_id">ca-app-pub-2137792542799325~6269926192</string>
+    <string name="admob_banner_id">ca-app-pub-2137792542799325/8764776338</string>-->
     <string name="admob_interstitial">ca-app-pub-3940256099942544/1033173712</string>
 
+
+    <!-- NEW ID's -->
+    <string name="admob_app_id">ca-app-pub-4677462554197877~8699663585</string>
+    <string name="admob_banner_id">ca-app-pub-4677462554197877/1942683543</string>
+
     <string name="about">
+
 The most authentic Islamic App for Namaz Timing and accurate Zakat Calculator, e-Tasbeeh, Qibla Compass, and 99 names of Allah SWT.
 
 Stay on top of your Namaz, the best Islamic app to get accurate Namaz Times, Depending on the Location, the Namaz times will be saved, and as soon as it is saved, the alarm will be set and at the time of alarm, the call of Namaz will be played and notification will come.

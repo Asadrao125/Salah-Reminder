@@ -1,6 +1,6 @@
-package com.gexton.salahreminder.names_list;
+package com.gexton.namazalert.names_list;
 
-import com.gexton.salahreminder.R;
+import com.gexton.namazalert.R;
 
 public class HelperClass {
     

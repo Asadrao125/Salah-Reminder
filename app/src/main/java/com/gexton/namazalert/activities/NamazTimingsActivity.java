@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.activities;
+package com.gexton.namazalert.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,6 @@ import android.location.Geocoder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -27,11 +26,11 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.gexton.salahreminder.AdsManager.SingletonAds;
-import com.gexton.salahreminder.R;
-import com.gexton.salahreminder.utils.SharedPref;
-import com.gexton.salahreminder.utils.ExecutableService;
-import com.gexton.salahreminder.utils.GPSTracker;
+import com.gexton.namazalert.AdsManager.SingletonAds;
+import com.gexton.namazalert.R;
+import com.gexton.namazalert.utils.SharedPref;
+import com.gexton.namazalert.utils.ExecutableService;
+import com.gexton.namazalert.utils.GPSTracker;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -52,7 +51,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
+import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 public class NamazTimingsActivity extends AppCompatActivity {
     GPSTracker gpsTracker;

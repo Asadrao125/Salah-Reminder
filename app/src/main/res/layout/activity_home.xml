@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorWhite"
-    tools:context="com.gexton.salahreminder.activities.HomeActivity">
+    android:background="#FBFBFB"
+    tools:context="com.gexton.namazalert.activities.HomeActivity">
 
     <androidx.appcompat.widget.Toolbar
            android:id="@+id/toolbar"
@@ -49,7 +49,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:background="@color/colorWhite">
+            android:background="#FBFBFB">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -96,7 +96,6 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -105,10 +104,13 @@
                 <androidx.cardview.widget.CardView
                     android:layout_weight="1"
                     android:id="@+id/cvNamazTimings"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_gravity="center"
@@ -126,13 +128,14 @@
                             android:background="@drawable/namaz" />
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="wrap_content"
                             android:gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/img1"
                             android:text="Namaz Timings"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:minLines="2"/>
 
                     </RelativeLayout>
 
@@ -140,11 +143,14 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_weight="1"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/cvDigitalTasbeeh"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_gravity="center"
@@ -161,13 +167,14 @@
                             android:background="@drawable/tasbih" />
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="wrap_content"
                             android:gravity="center"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/img2"
                             android:text="E - Tasbeeh"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:minLines="2"/>
 
                     </RelativeLayout>
 
@@ -176,6 +183,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="-13dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
@@ -184,10 +192,13 @@
                 <androidx.cardview.widget.CardView
                     android:layout_weight="1"
                     android:id="@+id/cvZakaatCalculator"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_gravity="center"
@@ -205,13 +216,14 @@
                             android:background="@drawable/zakaat_calculator" />
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/img3"
                             android:gravity="center"
                             android:text="Zakaat Calculator"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:minLines="2"/>
 
                     </RelativeLayout>
 
@@ -219,11 +231,14 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_weight="1"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/cvQiblaCompass"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_gravity="center"
@@ -240,13 +255,14 @@
                             android:background="@drawable/qibla" />
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/img4"
                             android:text="Qibla Compass"
                             android:gravity="center"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:minLines="2"/>
 
                     </RelativeLayout>
 
@@ -255,6 +271,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:layout_marginTop="-13dp"
                 android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -264,10 +281,13 @@
                 <androidx.cardview.widget.CardView
                     android:layout_weight="1"
                     android:id="@+id/cvNamesOfAllah"
-                    android:layout_width="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_width="0dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="10dp"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_gravity="center"
@@ -285,13 +305,14 @@
                             android:background="@drawable/names" />
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/img5"
                             android:text="99 Names of Allah"
                             android:textColor="@color/black"
                             android:gravity="center"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:minLines="2"/>
 
                     </RelativeLayout>
 
@@ -299,11 +320,14 @@
 
                 <androidx.cardview.widget.CardView
                     android:layout_weight="1"
-                    android:layout_margin="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="10dp"
                     android:id="@+id/cvSettings"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    app:cardCornerRadius="8dp">
+                    app:cardCornerRadius="10dp"
+                    app:cardElevation="5dp"
+                    app:cardUseCompatPadding="true">
 
                     <RelativeLayout
                         android:layout_gravity="center"
@@ -320,13 +344,14 @@
                             android:background="@drawable/settings" />
 
                         <TextView
-                            android:layout_width="120dp"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/img6"
                             android:text="Settings"
                             android:gravity="center"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="14sp"
+                            android:minLines="2"/>
 
                     </RelativeLayout>
 
@@ -336,7 +361,7 @@
 
             <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:id="@+id/ad_view_container"/>
 
         </LinearLayout>

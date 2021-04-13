@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/setting"
     android:orientation="vertical"
-    tools:context="com.gexton.salahreminder.activities.ZakaatCalculator">
+    tools:context="com.gexton.namazalert.activities.ZakaatCalculator">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

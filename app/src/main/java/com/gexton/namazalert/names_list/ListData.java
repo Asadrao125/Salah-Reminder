@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.names_list;
+package com.gexton.namazalert.names_list;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -7,13 +7,13 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gexton.salahreminder.AdsManager.SingletonAds;
-import com.gexton.salahreminder.R;
+import com.gexton.namazalert.AdsManager.SingletonAds;
+import com.gexton.namazalert.R;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
+import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 public class ListData extends AppCompatActivity {
 

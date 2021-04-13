@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.activities;
+package com.gexton.namazalert.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,10 +11,10 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gexton.salahreminder.AdsManager.SingletonAds;
-import com.gexton.salahreminder.R;
+import com.gexton.namazalert.AdsManager.SingletonAds;
+import com.gexton.namazalert.R;
 
-import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
+import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 public class ZakaatCalculator extends AppCompatActivity {
     Button btnCalculate;

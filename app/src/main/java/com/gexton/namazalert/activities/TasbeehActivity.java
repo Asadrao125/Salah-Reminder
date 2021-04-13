@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.activities;
+package com.gexton.namazalert.activities;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -26,12 +26,12 @@ import android.widget.NumberPicker;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.gexton.salahreminder.AdsManager.SingletonAds;
-import com.gexton.salahreminder.R;
-import com.gexton.salahreminder.tasbeeh_files.AboutDialog;
-import com.gexton.salahreminder.tasbeeh_files.NotificationBuilder;
-import com.gexton.salahreminder.tasbeeh_files.ResetDialog;
-import com.gexton.salahreminder.tasbeeh_files.SetTargetPicker;
+import com.gexton.namazalert.AdsManager.SingletonAds;
+import com.gexton.namazalert.R;
+import com.gexton.namazalert.tasbeeh_files.AboutDialog;
+import com.gexton.namazalert.tasbeeh_files.NotificationBuilder;
+import com.gexton.namazalert.tasbeeh_files.ResetDialog;
+import com.gexton.namazalert.tasbeeh_files.SetTargetPicker;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.text.SimpleDateFormat;
@@ -45,7 +45,7 @@ import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
+import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 public class TasbeehActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
     private static final String S_MAIN_COUNT = "mainCount"; //utk SharedPreference
@@ -58,7 +58,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     private TextView targetText;
     private Button buttonCount;
     private Button resetButton;
-    private ProgressBar progressBar, pb;
+    private ProgressBar pb;
     public int countZikr = 0;
     public int targetZikr = 10;
     private int progressCounter = 0;
@@ -78,12 +78,12 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         countText = findViewById(R.id.text_zikr);
         buttonCount = findViewById(R.id.button_count);
         resetButton = findViewById(R.id.button_reset);
-        progressBar = findViewById(R.id.progressBar);
+        //progressBar = findViewById(R.id.progressBar);
         pb = findViewById(R.id.pb);
         targetText = findViewById(R.id.textView_progress_target);
         cummulativeText = findViewById(R.id.textView_cummulative_count);
         targetText.setText("Target: " + String.valueOf(targetZikr));
-        progressBar.setMax(targetZikr);
+        //progressBar.setMax(targetZikr);
         pb.setMax(targetZikr);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -140,6 +140,13 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
                 vibrateFeedback(55);
                 showSnackBar(parentLayout, "Copied!");
                 return true;
+            }
+        });
+
+        findViewById(R.id.button_SetTarget).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openTargetDialog();
             }
         });
     }
@@ -251,10 +258,10 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
             resetButton.setVisibility(View.INVISIBLE);
 
             if (VERSION.SDK_INT >= VERSION_CODES.N) {
-                progressBar.setProgress(0, true); //set progress bar balik ke 0
+                //progressBar.setProgress(0, true); //set progress bar balik ke 0
                 pb.setProgress(0, true);
             } else {
-                progressBar.setProgress(0); //no animation
+                //progressBar.setProgress(0); //no animation
                 pb.setProgress(0);
             }
 
@@ -267,10 +274,10 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     public void updateProgressBar() {
 
         if (VERSION.SDK_INT >= VERSION_CODES.N) {
-            progressBar.setProgress(progressCounter, true);
+            //progressBar.setProgress(progressCounter, true);
             pb.setProgress(progressCounter, true);
         } else {
-            progressBar.setProgress(progressCounter); //no animation
+            //progressBar.setProgress(progressCounter); //no animation
             pb.setProgress(progressCounter);
         }
     }
@@ -311,7 +318,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         cummulativeRound = prefs.getInt(S_CUMMU_COUNT, 0);
         targetZikr = prefs.getInt(S_TARGET_ZIKR, 10);
 
-        progressBar.setMax(targetZikr);
+        //progressBar.setMax(targetZikr);
         pb.setMax(targetZikr);
         updateProgressBar();
 
@@ -371,7 +378,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
             showSnackBar(parentLayout, "Target number changed to " + newVal);
             targetZikr = newVal;
             targetText.setText("Target: " + String.valueOf(targetZikr));
-            progressBar.setMax(targetZikr);
+            //progressBar.setMax(targetZikr);
             pb.setMax(targetZikr);
             cummulativeRound = progressCounter = 0;
             cummulativeText.setText("0");

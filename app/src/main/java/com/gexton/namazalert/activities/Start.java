@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.activities;
+package com.gexton.namazalert.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -10,18 +10,17 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.FrameLayout;
-import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.gexton.salahreminder.AdsManager.SingletonAds;
-import com.gexton.salahreminder.R;
-import com.gexton.salahreminder.names_list.ListData;
-import com.gexton.salahreminder.names_list.ListViewAdapter;
+import com.gexton.namazalert.AdsManager.SingletonAds;
+import com.gexton.namazalert.R;
+import com.gexton.namazalert.names_list.ListData;
+import com.gexton.namazalert.names_list.ListViewAdapter;
 
-import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
+import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 
 public class Start extends Activity {
@@ -363,7 +362,6 @@ public class Start extends Activity {
                 Intent intent = new Intent(Start.this, ListData.class);
                 intent.putExtra("Position", i);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -417,10 +415,10 @@ public class Start extends Activity {
         });
     }
 
-    public void onBackPressed() {
+   /* public void onBackPressed() {
         startActivity(new Intent(Start.this, HomeActivity.class));
         finish();
-    }
+    }*/
 
     protected void onDestroy() {
         this.stop = true;

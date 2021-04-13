@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.utils;
+package com.gexton.namazalert.utils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;

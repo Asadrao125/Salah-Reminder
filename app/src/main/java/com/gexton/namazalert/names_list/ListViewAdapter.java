@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.names_list;
+package com.gexton.namazalert.names_list;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,7 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.gexton.salahreminder.R;
+import com.gexton.namazalert.R;
 
 public class ListViewAdapter extends BaseAdapter {
     Context context;

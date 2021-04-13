@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.tasbeeh_files;
+package com.gexton.namazalert.tasbeeh_files;
 
 import android.app.Application;
 import android.app.NotificationChannel;

@@ -1,4 +1,4 @@
-package com.gexton.salahreminder.utils;
+package com.gexton.namazalert.utils;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -13,8 +13,8 @@ import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 
-import com.gexton.salahreminder.R;
-import com.gexton.salahreminder.activities.NamazTimingsActivity;
+import com.gexton.namazalert.R;
+import com.gexton.namazalert.activities.NamazTimingsActivity;
 
 public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
