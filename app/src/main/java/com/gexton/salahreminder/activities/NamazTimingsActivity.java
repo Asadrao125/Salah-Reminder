@@ -60,7 +60,6 @@ public class NamazTimingsActivity extends AppCompatActivity {
     long current_h, current_m;
     ImageView imgBack;
     ImageView imgFajar, imgZuhar, imgAsar, imgMaghrib, imgISha;
-    /* txt_View_Date, txt_View_Day */
     TextView tvSunrise, tvSunset, tvLocation1;
     TextView tvFajar, tvZuhar, tvAsar, tvMaghrib, tvIsha;
     String MY_PREFS_NAME = "Namaz_Reminder", month, year, date, y, m, dd;
@@ -111,11 +110,6 @@ public class NamazTimingsActivity extends AppCompatActivity {
         tvSunrise.setText(sun_rise);
         tvSunset.setText(sun_set);
 
-        Date todayDate = Calendar.getInstance().getTime();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-mmmm-yyyy");
-        String todayString = formatter.format(todayDate);
-        //txt_View_Date.setText(todayString);
-
         OffsetDateTime offset = null;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             offset = OffsetDateTime.now();
@@ -125,13 +119,6 @@ public class NamazTimingsActivity extends AppCompatActivity {
             year = String.valueOf(offset.getYear());
             date = String.valueOf(offset.getDayOfMonth());
         }
-
-        String weekday_name = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(System.currentTimeMillis());
-        //txt_View_Day.setText("Today / " + weekday_name);
-
-        Date d = new Date();
-        CharSequence s = DateFormat.format("d MMMM yyyy ", d.getTime());
-        //txt_View_Date.setText(s);
 
         tvSunrise.setText(prefs.getString("s_r", "Set Time"));
         tvSunset.setText(prefs.getString("s_s", "Set Time"));

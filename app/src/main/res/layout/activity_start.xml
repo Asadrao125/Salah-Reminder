@@ -14,20 +14,23 @@
         android:background="@color/app_color"
         android:theme="@style/ToolBarTheme">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <ImageView
+                android:layout_centerVertical="true"
                 android:id="@+id/imgBack"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:padding="10dp"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/back" />
 
             <TextView
+                android:layout_toEndOf="@id/imgBack"
+                android:layout_centerVertical="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -35,11 +38,37 @@
                 android:textColor="@color/colorWhite"
                 android:textSize="18sp" />
 
-        </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="List"
+                android:id="@+id/tvList"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"/>
+
+            <TextView
+                android:id="@+id/tvAudio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="Audio"
+                android:visibility="gone"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/colorWhite"
+                android:textSize="18sp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"/>
+
+        </RelativeLayout>
 
     </androidx.appcompat.widget.Toolbar>
 
     <RelativeLayout
+        android:layout_above="@id/ad_view_container"
         android:layout_below="@id/toolbar"
         android:id="@+id/mainLayout"
         android:layout_width="match_parent"
@@ -59,9 +88,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/picture"
-            android:layout_marginTop="10dp"
-            android:text="TextView"
-            android:textColor="#000"
+            android:text="Name"
+            android:textColor="@color/black"
             android:textStyle="bold"
             android:gravity="center"/>
 
@@ -71,8 +99,8 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Name"
             android:layout_marginTop="0dp"
-            android:text="TextView"
-            android:textColor="#000"
+            android:text="Meaning"
+            android:textColor="@color/black"
             android:gravity="center"/>
 
         <TextView
@@ -81,6 +109,23 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/Meaning"
             android:text="" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/listLayout"
+        android:layout_above="@id/ad_view_container"
+        android:layout_below="@id/toolbar"
+        android:visibility="gone"
+        android:background="@color/colorWhite"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ListView
+            android:id="@+id/ListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none" />
 
     </RelativeLayout>
 

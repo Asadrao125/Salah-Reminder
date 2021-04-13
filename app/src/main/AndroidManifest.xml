@@ -10,6 +10,7 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name="com.gexton.salahreminder.activities.SettingsActivity"/>
+        <activity android:name="com.gexton.salahreminder.names_list.ListData"/>
         <activity android:name="com.gexton.salahreminder.activities.Start" />
         <activity android:name="com.gexton.salahreminder.activities.QiblaCompassActivity" />
         <activity android:name="com.gexton.salahreminder.activities.ZakaatCalculator" />

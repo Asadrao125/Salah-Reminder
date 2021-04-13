@@ -8,13 +8,18 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.FrameLayout;
+import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.os.PowerManager;
 
 import com.gexton.salahreminder.AdsManager.SingletonAds;
 import com.gexton.salahreminder.R;
+import com.gexton.salahreminder.names_list.ListData;
+import com.gexton.salahreminder.names_list.ListViewAdapter;
 
 import static com.gexton.salahreminder.AdsManager.AdsKt.showBanner;
 
@@ -24,11 +29,14 @@ public class Start extends Activity {
     ImageView imgBack;
     String[] allData;
     MediaPlayer audio;
+    RelativeLayout mainLayout, listLayout;
+    TextView tvList, tvAudio;
     int currentTime;
     Handler handler;
+    ListViewAdapter adapter;
+    public ListView list;
     int f48i;
     int f49j;
-    protected PowerManager.WakeLock mWakeLock;
     TextView meaning;
     int[] nameId;
     ImageView picture;
@@ -37,7 +45,6 @@ public class Start extends Activity {
     TextView time;
     int[] timeDelay;
 
-    /* renamed from: satsumadroid.asmaulhusna.allahnames.Start.1 */
     class C02331 implements Runnable {
         C02331() {
         }
@@ -71,7 +78,7 @@ public class Start extends Activity {
             }
             if (currentTime < Start.this.timeDelay[Start.this.f49j + 1]) {
                 if (Start.this.f49j == 98) {
-                    //Toast.makeText(Start.this.getApplicationContext(), Start.this.allData[Start.this.f48i], 0).show();
+
                 }
                 Start.this.picture.setBackgroundResource(Start.this.nameId[Start.this.f49j]);
                 Start.this.Name.setText(Start.this.allData[Start.this.f48i]);
@@ -87,7 +94,6 @@ public class Start extends Activity {
         }
     }
 
-    /* renamed from: satsumadroid.asmaulhusna.allahnames.Start.2 */
     class C02342 implements OnClickListener {
         C02342() {
         }
@@ -97,9 +103,8 @@ public class Start extends Activity {
         }
     }
 
-    /* renamed from: satsumadroid.asmaulhusna.allahnames.Start.3 */
     class C02353 implements OnClickListener {
-        private final /* synthetic */ Runnable val$checkTime;
+        private final Runnable val$checkTime;
 
         C02353(Runnable runnable) {
             this.val$checkTime = runnable;
@@ -226,12 +231,9 @@ public class Start extends Activity {
     }
 
     protected void onCreate(Bundle savedInstanceState) {
-        //requestWindowFeature(1);
-        //getWindow().setFlags(1024, 1024);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-        //getWindow().addFlags(128);
-        //getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
         this.audio = MediaPlayer.create(this, R.raw.audio);
         this.audio.getCurrentPosition();
         this.audio.start();
@@ -342,16 +344,57 @@ public class Start extends Activity {
         this.imgBack = findViewById(R.id.imgBack);
         this.meaning = (TextView) findViewById(R.id.Meaning);
         this.time = (TextView) findViewById(R.id.time);
+        this.tvList = findViewById(R.id.tvList);
+        this.tvAudio = findViewById(R.id.tvAudio);
+        this.mainLayout = findViewById(R.id.mainLayout);
+        this.listLayout = findViewById(R.id.listLayout);
         this.time.setVisibility(View.GONE);
         this.Name.setTextSize(20.0f);
         this.meaning.setTextSize(16.0f);
         this.Name.setText("Allah");
         this.meaning.setText("The Greatest Name");
+        this.list = findViewById(R.id.ListView);
+        this.adapter = new ListViewAdapter(getApplicationContext());
+
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Log.e("Position", String.valueOf(i));
+                Intent intent = new Intent(Start.this, ListData.class);
+                intent.putExtra("Position", i);
+                startActivity(intent);
+                finish();
+            }
+        });
 
         this.imgBack.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(Start.this, HomeActivity.class));
+                //startActivity(new Intent(Start.this, HomeActivity.class));
+                onBackPressed();
+            }
+        });
+
+        this.tvList.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvAudio.setVisibility(View.VISIBLE);
+                tvList.setVisibility(View.GONE);
+
+                listLayout.setVisibility(View.VISIBLE);
+                mainLayout.setVisibility(View.GONE);
+                Start.this.list.setAdapter(Start.this.adapter);
+            }
+        });
+
+        this.tvAudio.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tvAudio.setVisibility(View.GONE);
+                tvList.setVisibility(View.VISIBLE);
+
+                listLayout.setVisibility(View.GONE);
+                mainLayout.setVisibility(View.VISIBLE);
             }
         });
 
@@ -364,9 +407,6 @@ public class Start extends Activity {
         this.Name.setOnClickListener(new C02342());
         this.picture.setOnClickListener(new C02353(checkTime));
         this.handler.postDelayed(checkTime, 0);
-        /*final PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
-        this.mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
-        this.mWakeLock.acquire();*/
 
         audio.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
@@ -378,16 +418,11 @@ public class Start extends Activity {
     }
 
     public void onBackPressed() {
-        //this.audio.stop();
-        //Start.this.finish();
-        //System.exit(0);
-        //super.onBackPressed();
         startActivity(new Intent(Start.this, HomeActivity.class));
         finish();
     }
 
     protected void onDestroy() {
-        //this.mWakeLock.release();
         this.stop = true;
         if (this.audio.isPlaying()) {
             System.out.println("SUCCESS");
