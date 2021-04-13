@@ -4,45 +4,50 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/official_logo"
+        android:icon="@mipmap/app_icon"
         android:label="@string/app_name"
+        android:roundIcon="@mipmap/app_icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name="com.gexton.salahreminder.activities.SettingsActivity"/>
-        <activity android:name="com.gexton.salahreminder.names_list.ListData"/>
-        <activity android:name="com.gexton.salahreminder.activities.Start" />
-        <activity android:name="com.gexton.salahreminder.activities.QiblaCompassActivity" />
-        <activity android:name="com.gexton.salahreminder.activities.ZakaatCalculator" />
-        <activity android:name="com.gexton.salahreminder.activities.TasbeehActivity" />
-        <activity android:name="com.gexton.salahreminder.activities.HomeActivity">
+        <activity android:name=".activities.SplashActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
-        <activity android:name="com.gexton.salahreminder.activities.NamazTimingsActivity" />
+        <activity android:name=".activities.SettingsActivity" />
+        <activity android:name=".names_list.ListData" />
+        <activity android:name=".activities.Start" />
+        <activity android:name=".activities.QiblaCompassActivity" />
+        <activity android:name=".activities.ZakaatCalculator" />
+        <activity android:name=".activities.TasbeehActivity" />
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.NamazTimingsActivity" />
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="@string/admob_app_id" />
 
         <receiver
-            android:name="com.gexton.salahreminder.utils.ExecutableService"
+            android:name=".utils.ExecutableService"
             android:enabled="true" />
         <receiver
-            android:name="com.gexton.salahreminder.utils.Reciever"
+            android:name=".utils.Reciever"
             android:enabled="true" />
     </application>
 
     <uses-feature android:name="android.hardware.location.gps" />
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="com.android.alarm.permission.SET_ALARM" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.VIBRATE" />
-
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
