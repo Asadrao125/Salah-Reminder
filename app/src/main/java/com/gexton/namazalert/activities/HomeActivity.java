@@ -22,6 +22,8 @@ import com.gexton.namazalert.R;
 import com.gexton.namazalert.utils.GPSTracker;
 import com.gexton.namazalert.utils.SharedPref;
 
+import com.hassanjamil.hqibla.CompassActivity;
+import com.hassanjamil.hqibla.Constants;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -94,7 +96,17 @@ public class HomeActivity extends AppCompatActivity {
         cvQiblaCompass.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(HomeActivity.this, QiblaCompassActivity.class));
+                Intent intent = new Intent(HomeActivity.this, CompassActivity.class);
+                intent.putExtra(Constants.TOOLBAR_TITLE, "Qibla Compass");		// Toolbar Title
+                intent.putExtra(Constants.TOOLBAR_BG_COLOR, "#0b8f08");		// Toolbar Background color
+                intent.putExtra(Constants.TOOLBAR_TITLE_COLOR, "#FFFFFF");	// Toolbar Title color
+                intent.putExtra(Constants.COMPASS_BG_COLOR, "#FFFFFF");		// Compass background color
+                intent.putExtra(Constants.ANGLE_TEXT_COLOR, "#000000");		// Angle Text color
+                intent.putExtra(Constants.DRAWABLE_DIAL, R.drawable.dial);	// Your dial drawable resource
+                intent.putExtra(Constants.DRAWABLE_QIBLA, R.drawable.qibla); 	// Your qibla indicator drawable resource
+                intent.putExtra(Constants.FOOTER_IMAGE_VISIBLE, View.VISIBLE);	// Footer World Image visibility
+                intent.putExtra(Constants.LOCATION_TEXT_VISIBLE, View.VISIBLE); // Location Text visibility
+                startActivity(intent);
             }
         });
 

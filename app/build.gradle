@@ -53,5 +53,7 @@ dependencies {
     //
     implementation 'com.karumi:dexter:6.2.2'
     implementation group: 'net.time4j', name: 'time4j-android', version: '4.8-2021a'
+    //
+    implementation 'com.hassanjamil:qibla:0.2.2'
 
 }

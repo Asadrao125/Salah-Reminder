@@ -21,6 +21,30 @@
         android:layout_margin="20dp"
         android:src="@drawable/compass" />
 
+    <LinearLayout
+        android:gravity="center"
+        android:layout_below="@id/ivCompass"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:id="@+id/tvDeg1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Degree1"/>
+
+        <TextView
+            android:textSize="20sp"
+            android:id="@+id/tvDeg2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Degree 2"/>
+
+    </LinearLayout>
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"

@@ -252,7 +252,7 @@
                             android:id="@+id/img4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:background="@drawable/qibla" />
+                            android:background="@drawable/qibla_" />
 
                         <TextView
                             android:layout_width="wrap_content"

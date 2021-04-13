@@ -51,7 +51,97 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RadioGroup
+                android:layout_margin="20dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:checked="true"
+                    android:id="@+id/rbGold"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gold"/>
+
+                <RadioButton
+                    android:id="@+id/rbSilver"
+                    android:layout_marginRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Silver"/>
+
+                <RadioButton
+                    android:id="@+id/rbCash"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cash"/>
+
+            </RadioGroup>
+
             <LinearLayout
+                android:layout_margin="20dp"
+                android:id="@+id/gold_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Zakaat Value"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:visibility="gone"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:id="@+id/tvValue"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtGold"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dp"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:layout_height="wrap_content">
+
+                    <EditText
+                        android:id="@+id/edtGoldPrice"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawablePadding="10dp"
+                        android:inputType="numberDecimal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Calculate"
+                    android:id="@+id/btnDone"
+                    android:textColor="@color/colorWhite"
+                    android:background="@drawable/button_border"
+                    android:layout_marginTop="20dp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/amount_layout"
+                android:visibility="gone"
                 android:layout_margin="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

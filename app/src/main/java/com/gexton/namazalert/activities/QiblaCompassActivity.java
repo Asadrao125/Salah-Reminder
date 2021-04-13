@@ -13,6 +13,7 @@ import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gexton.namazalert.AdsManager.SingletonAds;
@@ -26,6 +27,7 @@ public class QiblaCompassActivity extends AppCompatActivity implements SensorEve
     public static SensorManager sensorManager;
     public static Sensor sensor;
     private float currentDegree;
+    TextView tvDeg2, tvDeg1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,8 @@ public class QiblaCompassActivity extends AppCompatActivity implements SensorEve
         ivCompass = findViewById(R.id.ivCompass);
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+        tvDeg2 = findViewById(R.id.tvDeg2);
+        tvDeg1 = findViewById(R.id.tvDeg1);
 
         SingletonAds.Companion.init(this);
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
@@ -63,6 +67,8 @@ public class QiblaCompassActivity extends AppCompatActivity implements SensorEve
         animation.setFillAfter(true);
         ivCompass.setAnimation(animation);
         currentDegree = -degree;
+        tvDeg1.setText("" + currentDegree);
+        //tvDeg2.setText("" + degree);
     }
 
     @Override
