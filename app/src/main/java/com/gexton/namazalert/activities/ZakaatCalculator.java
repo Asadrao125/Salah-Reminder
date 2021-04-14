@@ -96,11 +96,19 @@ public class ZakaatCalculator extends AppCompatActivity {
         btnDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                double gold = Long.parseLong(edtGold.getText().toString().trim());
-                double price = Long.parseLong(edtGoldPrice.getText().toString().trim());
-                if (gold != 0.0 && price != 0.0) {
-                    double n = gold * price;
-                    calculateZakat2(n);
+                if (TextUtils.isEmpty(edtGold.getText().toString().trim())) {
+                    edtGold.setError("Empty");
+                    edtGold.requestFocus();
+                } else if (TextUtils.isEmpty(edtGoldPrice.getText().toString().trim())) {
+                    edtGoldPrice.setError("Empty");
+                    edtGoldPrice.requestFocus();
+                } else {
+                    double gold = Long.parseLong(edtGold.getText().toString().trim());
+                    double price = Long.parseLong(edtGoldPrice.getText().toString().trim());
+                    if (gold != 0.0 && price != 0.0) {
+                        double n = gold * price;
+                        calculateZakat2(n);
+                    }
                 }
             }
         });

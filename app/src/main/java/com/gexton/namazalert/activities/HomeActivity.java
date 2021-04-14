@@ -1,5 +1,6 @@
 package com.gexton.namazalert.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -185,7 +186,12 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
                 if (report.areAllPermissionsGranted()) {
-                    setCity();
+                    gpsTracker = new GPSTracker(HomeActivity.this);
+                    if (gpsTracker.canGetLocation()){
+                        setCity();
+                    } else {
+                        gpsTracker.enableLocationPopup();
+                    }
                 }
             }
 
@@ -251,5 +257,15 @@ public class HomeActivity extends AppCompatActivity {
                         HijriCalendar.VARIANT_UMALQURA, StartOfDay.EVENING).toDate();
         System.out.println(hijriFormat.format(todayExact)); // 22nd Rajab 1438 (23rd after 18:00)
         tvHijriDate.setText("" + hijriFormat.format(todayExact));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        gpsTracker = new GPSTracker(HomeActivity.this);
+        if (requestCode == gpsTracker.REQUEST_CHECK_SETTING && resultCode == RESULT_OK) {
+            Log.d("req_check_setting_home", "onActivityResult: " + gpsTracker.REQUEST_CHECK_SETTING);
+            setCity();
+        }
     }
 }

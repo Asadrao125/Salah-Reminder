@@ -246,7 +246,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
                     url, null,
                     new Response.Listener<JSONObject>() {
 
-                        @Override/* Unnamed Road, Latifabad Unit 7 Latifabad, Hyderabad, Sindh 71000, Pakistan */
+                        @Override
                         public void onResponse(JSONObject response) {
                             try {
 
@@ -522,8 +522,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
                 String city = addresses.get(0).getLocality();
                 String country = addresses.get(0).getCountryName();
                 tvLocation1.setText(city + ", " + country);
-            } catch (
-                    IOException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
@@ -535,8 +534,9 @@ public class NamazTimingsActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == gpsTracker.REQUEST_CHECK_SETTING && resultCode == RESULT_OK) {
-            Log.d("req_check_setting", "onActivityResult: " + gpsTracker.REQUEST_CHECK_SETTING);
-            getNamazTimings();
+            Log.d("req_check_setting_namaz", "onActivityResult: " + gpsTracker.REQUEST_CHECK_SETTING);
+            startActivity(new Intent(this, NamazTimingsActivity.class));
+            finish();
         }
     }
 }
