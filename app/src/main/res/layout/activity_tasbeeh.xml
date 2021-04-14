@@ -7,7 +7,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/setting"
     android:orientation="vertical"
-
     tools:context="com.gexton.namazalert.activities.TasbeehActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -59,10 +58,31 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="10dp"
+                app:cardCornerRadius="15dp">
+
+            <TextView
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:text="Tap anywhere to perform tasbeeh"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:cardElevation="10dp"
+                android:id="@+id/cvParent"
                 app:cardUseCompatPadding="true"
                 app:cardCornerRadius="15dp">
+
                 <LinearLayout
                     android:gravity="center"
                     android:layout_width="match_parent"
@@ -70,12 +90,10 @@
                     android:orientation="vertical"
                     android:padding="20dp">
 
-
                     <FrameLayout
                         android:layout_gravity="center"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        >
+                        android:layout_height="wrap_content">
 
                         <RelativeLayout
                             android:layout_gravity="center"
@@ -109,14 +127,9 @@
                             style="?android:attr/progressBarStyleHorizontal"
                             android:max="100"
                             android:progress="65"
-
                             android:outlineSpotShadowColor="@android:color/black"/>
 
                     </FrameLayout>
-
-
-
-
 
                     <androidx.cardview.widget.CardView
                         android:layout_width="match_parent"
@@ -202,6 +215,7 @@
                             app:cardElevation="10dp"
                             app:cardUseCompatPadding="true"
                             app:cardCornerRadius="15dp">
+
                             <Button
                                 android:id="@+id/button_count"
                                 android:layout_width="match_parent"
@@ -220,6 +234,7 @@
                             android:layout_weight="1"
                             android:layout_height="wrap_content"
                             app:cardElevation="10dp"
+                            android:id="@+id/cvReset"
                             app:cardUseCompatPadding="true"
                             app:cardCornerRadius="15dp">
                         <Button

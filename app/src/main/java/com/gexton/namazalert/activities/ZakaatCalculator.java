@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.gexton.namazalert.AdsManager.SingletonAds;
 import com.gexton.namazalert.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
@@ -28,6 +29,7 @@ public class ZakaatCalculator extends AppCompatActivity {
     EditText edtGold, edtGoldPrice;
     RadioButton rbGold, rbSilver, rbCash;
     LinearLayout gold_layout, amount_layout;
+    TextInputLayout tilGold, tilGoldPrice;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +49,15 @@ public class ZakaatCalculator extends AppCompatActivity {
         btnDone = findViewById(R.id.btnDone);
         amount_layout = findViewById(R.id.amount_layout);
         tvValue = findViewById(R.id.tvValue);
+        tilGold = findViewById(R.id.tilGold);
+        tilGoldPrice = findViewById(R.id.tilGoldPrice);
 
-        if (rbGold.isChecked()) {
-            edtGold.setHint("Gold");
-            edtGoldPrice.setHint("Gold Price");
-        }
+        SingletonAds.Companion.init(this);
+        FrameLayout banner_container = findViewById(R.id.ad_view_container);
+        showBanner(this, banner_container);
+
+        tilGold.setHint("Gold In Tola");
+        tilGoldPrice.setHint("Gold Price Per Tola");
 
         rbGold.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -59,8 +65,8 @@ public class ZakaatCalculator extends AppCompatActivity {
                 if (b) {
                     gold_layout.setVisibility(View.VISIBLE);
                     amount_layout.setVisibility(View.GONE);
-                    edtGold.setHint("Gold");
-                    edtGoldPrice.setHint("Gold Price");
+                    tilGold.setHint("Gold In Tola");
+                    tilGoldPrice.setHint("Gold Price Per Tola");
                 }
             }
         });
@@ -71,8 +77,8 @@ public class ZakaatCalculator extends AppCompatActivity {
                 if (b) {
                     gold_layout.setVisibility(View.VISIBLE);
                     amount_layout.setVisibility(View.GONE);
-                    edtGold.setHint("Silver");
-                    edtGoldPrice.setHint("Silver Price");
+                    tilGold.setHint("Silver In Tola");
+                    tilGoldPrice.setHint("Silver Price Per Tola");
                 }
             }
         });
@@ -98,10 +104,6 @@ public class ZakaatCalculator extends AppCompatActivity {
                 }
             }
         });
-
-        SingletonAds.Companion.init(this);
-        FrameLayout banner_container = findViewById(R.id.ad_view_container);
-        showBanner(this, banner_container);
 
         imgBack.setOnClickListener(new View.OnClickListener() {
             @Override

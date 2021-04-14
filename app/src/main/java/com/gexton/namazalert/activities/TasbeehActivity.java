@@ -42,17 +42,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
 import androidx.browser.customtabs.CustomTabsIntent;
+import androidx.cardview.widget.CardView;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 public class TasbeehActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener {
-    private static final String S_MAIN_COUNT = "mainCount"; //utk SharedPreference
-    private static final String S_PROG_COUNT = "progressCount"; //utk SharedPreference
-    private static final String S_CUMMU_COUNT = "cummulativeCount"; //utk SharedPreference
-    private static final String S_TARGET_ZIKR = "targetZikr"; //target zikir counter tepi progress bar
-    private static final String TAG = "MainActivity";
+    private static final String S_MAIN_COUNT = "mainCount";
+    private static final String S_PROG_COUNT = "progressCount";
+    private static final String S_CUMMU_COUNT = "cummulativeCount";
+    private static final String S_TARGET_ZIKR = "targetZikr";
     private TextView countText;
     private TextView cummulativeText;
     private TextView targetText;
@@ -63,32 +63,30 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     public int targetZikr = 10;
     private int progressCounter = 0;
     private int cummulativeRound;
-    private long backPressedTimer;
     public View parentLayout;
-    private NotificationManagerCompat notificationManager;
     ImageView imgBack;
+    CardView cvParent, cvReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tasbeeh);
-        parentLayout = findViewById(R.id.parent_layout);
 
-        notificationManager = NotificationManagerCompat.from(this);
+        parentLayout = findViewById(R.id.parent_layout);
         countText = findViewById(R.id.text_zikr);
         buttonCount = findViewById(R.id.button_count);
         resetButton = findViewById(R.id.button_reset);
-        //progressBar = findViewById(R.id.progressBar);
         pb = findViewById(R.id.pb);
         targetText = findViewById(R.id.textView_progress_target);
         cummulativeText = findViewById(R.id.textView_cummulative_count);
         targetText.setText("Target: " + String.valueOf(targetZikr));
-        //progressBar.setMax(targetZikr);
         pb.setMax(targetZikr);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         imgBack = findViewById(R.id.imgBack);
+        cvParent = findViewById(R.id.cvParent);
+        cvReset= findViewById(R.id.cvReset);
 
         SingletonAds.Companion.init(this);
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
@@ -98,16 +96,6 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
             @Override
             public void onClick(View view) {
                 onBackPressed();
-            }
-        });
-
-        countText.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                copyText(countText.getText());
-                vibrateFeedback(55);
-                showSnackBar(parentLayout, "Copied!");
-                return true;
             }
         });
 
@@ -136,7 +124,6 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         cummulativeText.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                copyText(cummulativeText.getText());
                 vibrateFeedback(55);
                 showSnackBar(parentLayout, "Copied!");
                 return true;
@@ -149,86 +136,35 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
                 openTargetDialog();
             }
         });
+
+        cvParent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonCount.performClick();
+            }
+        });
+
+        pb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonCount.performClick();
+            }
+        });
+
+        countText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                buttonCount.performClick();
+            }
+        });
     }
 
-    private void copyText(CharSequence text) {
-        ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("simple text", text);
-        assert clipboard != null;
-        clipboard.setPrimaryClip(clip);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.more_action_menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) { //add action2 kau kat sini
-        switch (item.getItemId()) {
-            case R.id.action_change_theme:
-                changeThemeMode();
-                return true;
-            case R.id.action_share:
-                shareValueToOtherApp();
-                return true;
-            case R.id.action_item_1: //about
-                openAboutDialog();
-                return true;
-            case R.id.action_item_3: //setTargetValue
-                openTargetDialog();
-                return true;
-            case R.id.action_item_4: //showNotifs
-                showOnNotification();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
-
-    private void shareValueToOtherApp() {
-        Intent sendIntent = new Intent();
-        sendIntent.setAction(Intent.ACTION_SEND);
-
-        String message; //customize message here
-        message = "As of " + getCurrentDateTime() + ", ";
-        if (countZikr == 0)
-            message = message + "I didn't make any progress yet";
-        else
-            message = message + "I made till " + countZikr + ".";
-
-        sendIntent.putExtra(Intent.EXTRA_TEXT, message);
-        sendIntent.setType("text/plain");
-
-        Intent shareIntent = Intent.createChooser(sendIntent, null);
-        startActivity(shareIntent);
-    }
-
-    public void openWebPage(String url) {
-        Uri webpage = Uri.parse(url);
-        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-        if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivity(intent);
-        }
-    }
-
-    public void openCustomTabs(String url) {
-        CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder();
-        builder.setToolbarColor(getResources().getColor(R.color.colorPrimaryDark));
-        builder.setShowTitle(true);
-        CustomTabsIntent customTabsIntent = builder.build();
-        customTabsIntent.launchUrl(this, Uri.parse(url));
-    }
-
-    void changeThemeMode() {
+    /*void changeThemeMode() {
         if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_NO)
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
         else
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
-
-    }
+    }*/
 
     public void incrementCount() {
         buttonCount.setText("+1");
@@ -254,14 +190,13 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
             countText.setText("0");
             buttonCount.setText("START");
             cummulativeRound = 0;
-            cummulativeText.setText("");
-            resetButton.setVisibility(View.INVISIBLE);
+            cummulativeText.setText("Round 0");
+            //resetButton.setVisibility(View.INVISIBLE);
+            //cvReset.setVisibility(View.GONE);
 
             if (VERSION.SDK_INT >= VERSION_CODES.N) {
-                //progressBar.setProgress(0, true); //set progress bar balik ke 0
                 pb.setProgress(0, true);
             } else {
-                //progressBar.setProgress(0); //no animation
                 pb.setProgress(0);
             }
 
@@ -272,12 +207,9 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     }
 
     public void updateProgressBar() {
-
         if (VERSION.SDK_INT >= VERSION_CODES.N) {
-            //progressBar.setProgress(progressCounter, true);
             pb.setProgress(progressCounter, true);
         } else {
-            //progressBar.setProgress(progressCounter); //no animation
             pb.setProgress(progressCounter);
         }
     }
@@ -285,11 +217,6 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     public void openResetDialog() {
         ResetDialog resetDialog = new ResetDialog(this);
         resetDialog.show(getSupportFragmentManager(), "reset dialog");
-    }
-
-    public void openAboutDialog() {
-        AboutDialog aboutDialog = new AboutDialog(this);
-        aboutDialog.show(getSupportFragmentManager(), "about dialog");
     }
 
     @Override
@@ -318,7 +245,6 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         cummulativeRound = prefs.getInt(S_CUMMU_COUNT, 0);
         targetZikr = prefs.getInt(S_TARGET_ZIKR, 10);
 
-        //progressBar.setMax(targetZikr);
         pb.setMax(targetZikr);
         updateProgressBar();
 
@@ -349,36 +275,12 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         snackbar.show();
     }
 
-    private String getCurrentDateTime() {
-        String pattern = "dd/MM/yy HH:mm:ss";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-        String date = simpleDateFormat.format(new Date());
-        return date;
-    }
-
-    @Override
-    public void onBackPressed() {
-        /*long millisToExit = 2000;
-        if (backPressedTimer + millisToExit > System.currentTimeMillis()) {
-            super.onBackPressed();
-        } else {
-            Toast.makeText(this, "Tap again to exit", Toast.LENGTH_SHORT).show();
-        }
-        backPressedTimer = System.currentTimeMillis();*/
-        super.onBackPressed();
-    }
-
-    public void ViewAndroidBuildNum(View view) {
-        Log.d(TAG, "ViewAndroidBuildNum: is" + VERSION.SDK_INT);
-    }
-
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
         if (oldVal != newVal) {
             showSnackBar(parentLayout, "Target number changed to " + newVal);
             targetZikr = newVal;
             targetText.setText("Target: " + String.valueOf(targetZikr));
-            //progressBar.setMax(targetZikr);
             pb.setMax(targetZikr);
             cummulativeRound = progressCounter = 0;
             cummulativeText.setText("0");
@@ -396,28 +298,5 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
                 v.vibrate(millis);
             }
         }
-    }
-
-    public void showOnNotification() {
-        finish();
-        String title = "Current counter";
-
-        Intent activityIntent = new Intent(this, TasbeehActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this,
-                0, activityIntent, 0);
-
-        Notification notification = new NotificationCompat.Builder(this, NotificationBuilder.CHANNEL_ID_1)
-                .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(title)
-                .setContentText(String.valueOf(countZikr))
-                .setColor(Color.rgb(230, 28, 98))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setContentIntent(contentIntent)
-                .setAutoCancel(true)
-                .setOnlyAlertOnce(true)
-                .build();
-
-        notificationManager.notify(1, notification);
     }
 }
