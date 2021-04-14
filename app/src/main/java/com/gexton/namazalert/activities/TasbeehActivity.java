@@ -1,23 +1,12 @@
 package com.gexton.namazalert.activities;
 
-import android.app.Notification;
-import android.app.PendingIntent;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -28,23 +17,13 @@ import android.widget.TextView;
 
 import com.gexton.namazalert.AdsManager.SingletonAds;
 import com.gexton.namazalert.R;
-import com.gexton.namazalert.tasbeeh_files.AboutDialog;
-import com.gexton.namazalert.tasbeeh_files.NotificationBuilder;
 import com.gexton.namazalert.tasbeeh_files.ResetDialog;
 import com.gexton.namazalert.tasbeeh_files.SetTargetPicker;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.widget.Toolbar;
-import androidx.browser.customtabs.CustomTabsIntent;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
 import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
@@ -60,12 +39,13 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     private Button resetButton;
     private ProgressBar pb;
     public int countZikr = 0;
-    public int targetZikr = 10;
+    public int targetZikr = 33;
     private int progressCounter = 0;
     private int cummulativeRound;
     public View parentLayout;
+    int newVar = 0;
     ImageView imgBack;
-    CardView cvParent, cvReset;
+    CardView cvReset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,14 +59,14 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         pb = findViewById(R.id.pb);
         targetText = findViewById(R.id.textView_progress_target);
         cummulativeText = findViewById(R.id.textView_cummulative_count);
-        targetText.setText("Target: " + String.valueOf(targetZikr));
+        targetText.setText("Target: " + "0/" + String.valueOf(targetZikr));
         pb.setMax(targetZikr);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         SharedPreferences prefs = getSharedPreferences("prefs", MODE_PRIVATE);
         imgBack = findViewById(R.id.imgBack);
-        cvParent = findViewById(R.id.cvParent);
-        cvReset= findViewById(R.id.cvReset);
+        //cvParent = findViewById(R.id.cvParent);
+        cvReset = findViewById(R.id.cvReset);
 
         SingletonAds.Companion.init(this);
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
@@ -114,7 +94,8 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
             }
         });
 
-        targetText.setOnClickListener(new View.OnClickListener() {
+        //gm commented
+        /*targetText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openTargetDialog();
@@ -128,7 +109,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
                 showSnackBar(parentLayout, "Copied!");
                 return true;
             }
-        });
+        });*/
 
         findViewById(R.id.button_SetTarget).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -137,7 +118,7 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
             }
         });
 
-        cvParent.setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.jbjb).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 buttonCount.performClick();
@@ -169,11 +150,18 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     public void incrementCount() {
         buttonCount.setText("+1");
         countZikr++;
+        newVar += 1;
         countText.setText(String.valueOf(countZikr));
         progressCounter++;
+        targetText.setText("Target: " + newVar + "/" + String.valueOf(targetZikr));
         updateProgressBar();
 
         resetButton.setVisibility(View.VISIBLE);
+
+        if (newVar == targetZikr) {
+            newVar = 0;
+            targetText.setText("Target: " + targetZikr + "/" + String.valueOf(targetZikr));
+        }
 
         if (progressCounter == targetZikr) {
             progressCounter = 0;
@@ -186,6 +174,8 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
     public void resetCount(Boolean proceed) { //attached to reset button kat bawah tu
         if (proceed) {
             countZikr = 0;
+            newVar = 0;
+            targetText.setText("Target: " + newVar + "/" + String.valueOf(targetZikr));
             progressCounter = 0;
             countText.setText("0");
             buttonCount.setText("START");
@@ -243,12 +233,12 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         countZikr = prefs.getInt(S_MAIN_COUNT, 0);
         progressCounter = prefs.getInt(S_PROG_COUNT, 0);
         cummulativeRound = prefs.getInt(S_CUMMU_COUNT, 0);
-        targetZikr = prefs.getInt(S_TARGET_ZIKR, 10);
+        targetZikr = prefs.getInt(S_TARGET_ZIKR, 33);
 
         pb.setMax(targetZikr);
         updateProgressBar();
 
-        targetText.setText("Target: " + String.valueOf(targetZikr));
+        targetText.setText("Target: " + newVar + "/" + String.valueOf(targetZikr));
 
         cummulativeText.setText("Round: " + cummulativeRound);
 
@@ -280,7 +270,8 @@ public class TasbeehActivity extends AppCompatActivity implements NumberPicker.O
         if (oldVal != newVal) {
             showSnackBar(parentLayout, "Target number changed to " + newVal);
             targetZikr = newVal;
-            targetText.setText("Target: " + String.valueOf(targetZikr));
+            newVar = 0;
+            targetText.setText("Target: " + newVar + "/" + String.valueOf(targetZikr));
             pb.setMax(targetZikr);
             cummulativeRound = progressCounter = 0;
             cummulativeText.setText("0");

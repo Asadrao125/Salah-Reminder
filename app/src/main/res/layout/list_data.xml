@@ -76,6 +76,7 @@
                 android:gravity="center"
                 android:textColor="@color/black"
                 android:text="Description"
+                android:lineSpacingExtra="5dp"
                 android:textSize="18sp"
                 android:padding="5dp" />
 
