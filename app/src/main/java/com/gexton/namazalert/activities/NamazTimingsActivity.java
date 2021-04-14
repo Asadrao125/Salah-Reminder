@@ -1,5 +1,6 @@
 package com.gexton.namazalert.activities;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
@@ -494,21 +495,11 @@ public class NamazTimingsActivity extends AppCompatActivity {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
                 if (report.areAllPermissionsGranted()) {
+                    gpsTracker = new GPSTracker(NamazTimingsActivity.this);
                     if (gpsTracker.canGetLocation()) {
-                        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-                        List<Address> addresses = null;
-                        try {
-                            addresses = geocoder.getFromLocation(gpsTracker.getLatitude(), gpsTracker.getLongitude(), 1);
-                            address = addresses.get(0).getAddressLine(0);
-                            Log.d("Location_Address", "onLocationChanged: " + address);
-                            getResponse(address);
-                            String city = addresses.get(0).getLocality();
-                            String country = addresses.get(0).getCountryName();
-                            tvLocation1.setText(city + ", " + country);
-                        } catch (
-                                IOException e) {
-                            e.printStackTrace();
-                        }
+                        getNamazTimings();
+                    } else {
+                        gpsTracker.enableLocationPopup();
                     }
                 }
             }
@@ -518,5 +509,34 @@ public class NamazTimingsActivity extends AppCompatActivity {
                 token.continuePermissionRequest();
             }
         }).check();
+    }
+
+    private void getNamazTimings() {
+        if (gpsTracker.canGetLocation()) {
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            try {
+                List<Address> addresses = geocoder.getFromLocation(gpsTracker.getLatitude(), gpsTracker.getLongitude(), 1);
+                address = addresses.get(0).getAddressLine(0);
+                Log.d("Location_Address", "onLocationChanged: " + address);
+                getResponse(address);
+                String city = addresses.get(0).getLocality();
+                String country = addresses.get(0).getCountryName();
+                tvLocation1.setText(city + ", " + country);
+            } catch (
+                    IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            gpsTracker.enableLocationPopup();
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == gpsTracker.REQUEST_CHECK_SETTING && resultCode == RESULT_OK) {
+            Log.d("req_check_setting", "onActivityResult: " + gpsTracker.REQUEST_CHECK_SETTING);
+            getNamazTimings();
+        }
     }
 }

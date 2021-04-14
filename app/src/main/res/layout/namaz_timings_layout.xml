@@ -45,6 +45,7 @@
            <LinearLayout
                android:background="@drawable/bg_image"
                android:gravity="center"
+               android:layout_marginTop="-2dp"
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:orientation="vertical">
@@ -148,6 +149,7 @@
            </LinearLayout>
 
            <LinearLayout
+               android:layout_marginTop="-1dp"
                android:layout_width="match_parent"
                android:layout_height="match_parent"
                android:orientation="vertical">
