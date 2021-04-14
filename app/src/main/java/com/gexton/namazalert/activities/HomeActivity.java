@@ -97,14 +97,14 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(HomeActivity.this, CompassActivity.class);
-                intent.putExtra(Constants.TOOLBAR_TITLE, "Qibla Compass");		// Toolbar Title
-                intent.putExtra(Constants.TOOLBAR_BG_COLOR, "#0b8f08");		// Toolbar Background color
-                intent.putExtra(Constants.TOOLBAR_TITLE_COLOR, "#FFFFFF");	// Toolbar Title color
-                intent.putExtra(Constants.COMPASS_BG_COLOR, "#FFFFFF");		// Compass background color
-                intent.putExtra(Constants.ANGLE_TEXT_COLOR, "#000000");		// Angle Text color
-                intent.putExtra(Constants.DRAWABLE_DIAL, R.drawable.dial);	// Your dial drawable resource
-                intent.putExtra(Constants.DRAWABLE_QIBLA, R.drawable.qibla); 	// Your qibla indicator drawable resource
-                intent.putExtra(Constants.FOOTER_IMAGE_VISIBLE, View.VISIBLE);	// Footer World Image visibility
+                intent.putExtra(Constants.TOOLBAR_TITLE, "Qibla Compass");        // Toolbar Title
+                intent.putExtra(Constants.TOOLBAR_BG_COLOR, "#0b8f08");        // Toolbar Background color
+                intent.putExtra(Constants.TOOLBAR_TITLE_COLOR, "#FFFFFF");    // Toolbar Title color
+                intent.putExtra(Constants.COMPASS_BG_COLOR, "#FFFFFF");        // Compass background color
+                intent.putExtra(Constants.ANGLE_TEXT_COLOR, "#000000");        // Angle Text color
+                intent.putExtra(Constants.DRAWABLE_DIAL, R.drawable.dial);    // Your dial drawable resource
+                intent.putExtra(Constants.DRAWABLE_QIBLA, R.drawable.qibla);    // Your qibla indicator drawable resource
+                intent.putExtra(Constants.FOOTER_IMAGE_VISIBLE, View.VISIBLE);    // Footer World Image visibility
                 intent.putExtra(Constants.LOCATION_TEXT_VISIBLE, View.VISIBLE); // Location Text visibility
                 startActivity(intent);
             }
@@ -140,21 +140,7 @@ public class HomeActivity extends AppCompatActivity {
             }
         }, 10);
 
-        if (gpsTracker.canGetLocation()) {
-            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
-            List<Address> addresses = null;
-            try {
-                addresses = geocoder.getFromLocation(gpsTracker.getLatitude(), gpsTracker.getLongitude(), 1);
-                address = addresses.get(0).getAddressLine(0);
-                Log.d("city_country", "onLocationChanged: " + address);
-                String city = addresses.get(0).getLocality();
-                String country = addresses.get(0).getCountryName();
-                tvLocation1.setText(city + ", " + country);
-            } catch (
-                    IOException e) {
-                e.printStackTrace();
-            }
-        }
+        checkPermission2();
 
         getHijriDate();
 
@@ -186,6 +172,46 @@ public class HomeActivity extends AppCompatActivity {
         cvQiblaCompass = findViewById(R.id.cvQiblaCompass);
         cvNamesOfAllah = findViewById(R.id.cvNamesOfAllah);
         cvSettings = findViewById(R.id.cvSettings);
+    }
+
+    private void checkPermission2() {
+        Dexter.withContext(this)
+                .withPermissions(
+                        Manifest.permission.ACCESS_COARSE_LOCATION,
+                        Manifest.permission.ACCESS_FINE_LOCATION,
+                        Manifest.permission.VIBRATE,
+                        Manifest.permission.SET_ALARM
+                ).withListener(new MultiplePermissionsListener() {
+            @Override
+            public void onPermissionsChecked(MultiplePermissionsReport report) {
+                if (report.areAllPermissionsGranted()) {
+                    setCity();
+                }
+            }
+
+            @Override
+            public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {
+                token.continuePermissionRequest();
+            }
+        }).check();
+    }
+
+    private void setCity() {
+        gpsTracker = new GPSTracker(HomeActivity.this);
+        if (gpsTracker.canGetLocation()) {
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            try {
+                List<Address> addresses = geocoder.getFromLocation(gpsTracker.getLatitude(), gpsTracker.getLongitude(), 1);
+                address = addresses.get(0).getAddressLine(0);
+                Log.d("city_country", "setCity: " + address);
+                String city = addresses.get(0).getLocality();
+                String country = addresses.get(0).getCountryName();
+                tvLocation1.setText(city + ", " + country);
+            } catch (
+                    IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     private void checkPermission() {
