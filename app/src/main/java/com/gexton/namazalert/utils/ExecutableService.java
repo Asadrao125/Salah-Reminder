@@ -14,9 +14,6 @@ public class ExecutableService extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        NotificationHelper notificaitonHelper = new NotificationHelper(context);
-        NotificationCompat.Builder nb = notificaitonHelper.getChannelNotification();
-        notificaitonHelper.getManager().notify(1, nb.build());
 
         SharedPref.init(context);
         fajar = SharedPref.read("fajar", "");
@@ -28,15 +25,35 @@ public class ExecutableService extends BroadcastReceiver {
         val = intent.getStringExtra("val");
 
         if (val.equals("fajar") && fajar.equals("yes")) {
+            completeNotif(context);
             AzanControl.getInstance(context).playAzan();
         } else if (val.equals("zuhar") && zuhar.equals("yes")) {
+            completeNotif(context);
             AzanControl.getInstance(context).playAzan();
         } else if (val.equals("asar") && asar.equals("yes")) {
+            completeNotif(context);
             AzanControl.getInstance(context).playAzan();
         } else if (val.equals("maghrib") && maghrib.equals("yes")) {
+            completeNotif(context);
             AzanControl.getInstance(context).playAzan();
         } else if (val.equals("isha") && isha.equals("yes")) {
+            completeNotif(context);
             AzanControl.getInstance(context).playAzan();
+        } else {
+            simpleNotif(context);
         }
     }
+
+    public void completeNotif(Context context){
+        NotificationHelper notificaitonHelper = new NotificationHelper(context);
+        NotificationCompat.Builder nb = notificaitonHelper.getChannelNotification(val);
+        notificaitonHelper.getManager().notify(1, nb.build());
+    }
+
+    public void simpleNotif(Context context){
+        NotificationHelper notificaitonHelper = new NotificationHelper(context);
+        NotificationCompat.Builder nb = notificaitonHelper.simpleNotification(val);
+        notificaitonHelper.getManager().notify(2, nb.build());
+    }
+
 }

@@ -43,7 +43,7 @@ public class NotificationHelper extends ContextWrapper {
     }
 
     @SuppressLint("ResourceAsColor")
-    public NotificationCompat.Builder getChannelNotification() {
+    public NotificationCompat.Builder getChannelNotification(String namazName) {
 
         Intent activityIntent = new Intent(getApplicationContext(), NamazTimingsActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
@@ -53,12 +53,23 @@ public class NotificationHelper extends ContextWrapper {
         PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, brodcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle("Namaz Time Alert")
+                .setContentTitle(namazName + " Time Alert")
                 .setSmallIcon(R.mipmap.official_logo)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setColor(R.color.colorPrimary)
                 .setContentIntent(contentIntent)
-                .addAction(R.mipmap.ic_launcher, "Stop Azan", actionIntent)
-                .setTicker("Tap To Update Namaz");
+                .addAction(R.mipmap.ic_launcher, "Stop " + namazName + " Azan", actionIntent);
+    }
+
+    @SuppressLint("ResourceAsColor")
+    public NotificationCompat.Builder simpleNotification(String namazName) {
+        Intent activityIntent = new Intent(getApplicationContext(), NamazTimingsActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 1, activityIntent, 0);
+        return new NotificationCompat.Builder(getApplicationContext(), channelID)
+                .setContentTitle(namazName + " Time Alert")
+                .setSmallIcon(R.mipmap.official_logo)
+                .setDefaults(Notification.DEFAULT_ALL)
+                .setColor(R.color.colorPrimary)
+                .setContentIntent(contentIntent);
     }
 }

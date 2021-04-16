@@ -71,7 +71,7 @@ public class SettingsActivity extends AppCompatActivity {
             shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
             startActivity(Intent.createChooser(shareIntent, "choose one"));
         } catch (Exception e) {
-            //e.toString();
+
         }
     }
 
