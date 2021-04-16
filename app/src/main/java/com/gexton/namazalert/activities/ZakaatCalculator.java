@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -103,12 +104,9 @@ public class ZakaatCalculator extends AppCompatActivity {
                     edtGoldPrice.setError("Empty");
                     edtGoldPrice.requestFocus();
                 } else {
-                    double gold = Long.parseLong(edtGold.getText().toString().trim());
-                    double price = Long.parseLong(edtGoldPrice.getText().toString().trim());
-                    if (gold != 0.0 && price != 0.0) {
-                        double n = gold * price;
-                        calculateZakat2(n);
-                    }
+                    String gold = edtGold.getText().toString().trim();
+                    String goldRate = edtGoldPrice.getText().toString().trim();
+                    calculateZakat2(gold, goldRate);
                 }
             }
         });
@@ -142,9 +140,13 @@ public class ZakaatCalculator extends AppCompatActivity {
         tvZakaatValue.setText("Zakaat Value: " + zakaat);
     }
 
-    private void calculateZakat2(double amount) {
-        double zakaat = ((2.5 * amount) / 100);
-        tvValue.setText("Zakaat: " + zakaat);
+    private void calculateZakat2(String gold, String goldPrice) {
+        double goldNew = Double.parseDouble(gold);
+        double goldPriceNew = Double.parseDouble(goldPrice);
+        double amount = goldNew * goldPriceNew;
+        double result = ((2.5 * amount) / 100);
+        Log.d("details_zakat", "calculateZakat2: \ngoldNew: " + goldNew + "\ngoldPriceNew " + goldPriceNew + "\nAmount " + amount + "\nResult: " + result);
         tvValue.setVisibility(View.VISIBLE);
+        tvValue.setText("Zakaat: " + result);
     }
 }

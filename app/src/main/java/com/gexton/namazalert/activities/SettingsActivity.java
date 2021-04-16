@@ -58,7 +58,7 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void rateApp() {
-        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=PackageName")));
+        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + BuildConfig.APPLICATION_ID)));
     }
 
     public void shareIntent() {
