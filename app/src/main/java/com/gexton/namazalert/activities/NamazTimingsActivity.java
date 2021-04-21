@@ -1,8 +1,5 @@
 package com.gexton.namazalert.activities;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.Manifest;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -29,9 +26,9 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.gexton.namazalert.AdsManager.SingletonAds;
 import com.gexton.namazalert.R;
-import com.gexton.namazalert.utils.SharedPref;
 import com.gexton.namazalert.utils.ExecutableService;
 import com.gexton.namazalert.utils.GPSTracker;
+import com.gexton.namazalert.utils.SharedPref;
 import com.karumi.dexter.Dexter;
 import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
@@ -52,24 +49,25 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 public class NamazTimingsActivity extends AppCompatActivity {
     GPSTracker gpsTracker;
     SharedPreferences prefs;
     long current_h, current_m;
-    ImageView imgBack;
-    ImageView imgFajar, imgZuhar, imgAsar, imgMaghrib, imgISha;
-    TextView tvSunrise, tvSunset, tvLocation1;
+    ImageView imgFajar, imgZuhar, imgAsar, imgMaghrib, imgISha, imgBack;
+    TextView tvSunrise, tvSunset, tvLocation1, c_time;
     TextView tvFajar, tvZuhar, tvAsar, tvMaghrib, tvIsha;
     String MY_PREFS_NAME = "Namaz_Reminder", month, year, date, y, m, dd;
-    TextView fajar_fajar, zuhur_zuhar, asar_asar, maghrib_maghrib, isha_isha, c_time;
     String address, ff, zz, mm, ii, aa, sun_rise_sun, sunset_sun_set;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.namaz_timings_layout);
+        setContentView(R.layout.activity_namaz_timings);
 
         initialization();
         SharedPref.init(this);
@@ -111,7 +109,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
         tvSunset.setText(sun_set);
 
         OffsetDateTime offset = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             offset = OffsetDateTime.now();
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -123,7 +121,7 @@ public class NamazTimingsActivity extends AppCompatActivity {
         tvSunrise.setText(prefs.getString("s_r", "Set Time"));
         tvSunset.setText(prefs.getString("s_s", "Set Time"));
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             current_h = LocalDateTime.now().getHour();
             current_m = LocalDateTime.now().getMinute();
         }
@@ -229,7 +227,6 @@ public class NamazTimingsActivity extends AppCompatActivity {
         } else {
             imgISha.setImageResource(R.drawable.n_off);
         }
-
     }
 
     @Override
@@ -241,170 +238,29 @@ public class NamazTimingsActivity extends AppCompatActivity {
     private void getResponse(String addres) {
         if (getApplicationContext() != null) {
             String url = "http://api.aladhan.com/v1/timingsByAddress?address=" + addres;
-            ////
             JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                     url, null,
                     new Response.Listener<JSONObject>() {
-
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-
                                 Log.d("response_msg", "onResponse: " + response);
-                                ff = response.getJSONObject("data").getJSONObject("timings").get("Fajr").toString();
-                                sun_rise_sun = response.getJSONObject("data").getJSONObject("timings").get("Sunrise").toString();
-                                zz = response.getJSONObject("data").getJSONObject("timings").get("Dhuhr").toString();
-                                aa = response.getJSONObject("data").getJSONObject("timings").get("Asr").toString();
-                                sunset_sun_set = response.getJSONObject("data").getJSONObject("timings").get("Sunset").toString();
-                                mm = response.getJSONObject("data").getJSONObject("timings").get("Maghrib").toString();
-                                ii = response.getJSONObject("data").getJSONObject("timings").get("Isha").toString();
+                                JSONObject obj = response.getJSONObject("data").getJSONObject("timings");
+                                ff = obj.get("Fajr").toString();
+                                sun_rise_sun = obj.get("Sunrise").toString();
+                                zz = obj.get("Dhuhr").toString();
+                                aa = obj.get("Asr").toString();
+                                sunset_sun_set = obj.get("Sunset").toString();
+                                mm = obj.get("Maghrib").toString();
+                                ii = obj.get("Isha").toString();
 
-                                /////////////////////////////////////////////
-                                String alaramtime_fajar = ff;
-                                String alaramtimesplit_fajar[] = alaramtime_fajar.split(":");
-                                int firstval_fajar = Integer.parseInt(alaramtimesplit_fajar[0]);    //4
-                                int secondval_fajar = Integer.parseInt(alaramtimesplit_fajar[1]);   //05
+                                setAlarm(ff, 109833, "fajar");
+                                setAlarm(zz, 675483, "zuhar");
+                                setAlarm(aa, 768564, "asar");
+                                setAlarm(mm, 980324, "maghrib");
+                                setAlarm(ii, 764687, "isha");
 
-                                Calendar c = Calendar.getInstance();
-                                c.set(Calendar.HOUR_OF_DAY, firstval_fajar);
-                                c.set(Calendar.MINUTE, secondval_fajar);
-                                c.set(Calendar.SECOND, 0);
-
-                                if (getApplicationContext() != null) {
-                                    AlarmManager alarmManager = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-                                    Intent intent = new Intent(getApplicationContext(), ExecutableService.class);
-                                    intent.putExtra("val", "fajar");
-
-                                    PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 109833, intent, 0);
-
-                                    if (c.before(Calendar.getInstance())) {
-                                        c.add(Calendar.DATE, 1);
-                                    }
-
-                                    if (alarmManager != null) {
-                                        alarmManager.setRepeating(AlarmManager.RTC_WAKEUP,
-                                                c.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent); //Repeat every 24 hours
-                                        Log.d("Fajar", "onResponse: Alarm Set Fajar");
-                                    }
-                                }
-                                ///////////////////////////////////////////////
-
-                                /////////////////////////////////////////////
-                                String alaramtime_zuhar = zz;
-                                String alaramtimesplit_zuhar[] = alaramtime_zuhar.split(":");
-                                int firstval_zuhar = Integer.parseInt(alaramtimesplit_zuhar[0]);    //4
-                                int secondval_zuhar = Integer.parseInt(alaramtimesplit_zuhar[1]);   //05
-
-                                Calendar c2 = Calendar.getInstance();
-                                c2.set(Calendar.HOUR_OF_DAY, firstval_zuhar);
-                                c2.set(Calendar.MINUTE, secondval_zuhar);
-                                c2.set(Calendar.SECOND, 0);
-
-                                if (getApplicationContext() != null) {
-                                    AlarmManager alarmManager_zuhar = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-                                    Intent intent_zuhar = new Intent(getApplicationContext(), ExecutableService.class);
-                                    intent_zuhar.putExtra("val", "zuhar");
-
-                                    PendingIntent pendingIntent_zuhar = PendingIntent.getBroadcast(getApplicationContext(), 675483, intent_zuhar, 0);
-                                    if (c2.before(Calendar.getInstance())) {
-                                        c2.add(Calendar.DATE, 1);
-                                    }
-
-                                    if (alaramtime_zuhar != null) {
-                                        alarmManager_zuhar.setRepeating(AlarmManager.RTC_WAKEUP,
-                                                c2.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent_zuhar); //Repeat every 24 hours
-                                        //Toast.makeText(getApplicationContext(), "Alarm Set Zuhar!", Toast.LENGTH_SHORT).show();
-                                        Log.d("Zuhar", "onResponse: Alarm Set Zuhar");
-                                    }
-                                }
-                                ///////////////////////////////////////////////
-                                /////////////////////////////////////////////
-                                String alaramtime_asar = aa;
-                                String alaramtimesplit_asar[] = alaramtime_asar.split(":");
-                                int firstval_asar = Integer.parseInt(alaramtimesplit_asar[0]);//4
-                                int secondval_asar = Integer.parseInt(alaramtimesplit_asar[1]);   //05
-
-                                Calendar c3 = Calendar.getInstance();
-                                c3.set(Calendar.HOUR_OF_DAY, firstval_asar);
-                                c3.set(Calendar.MINUTE, secondval_asar);
-                                c3.set(Calendar.SECOND, 0);
-
-                                if (getApplicationContext() != null) {
-                                    AlarmManager alarmManager_asar = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-                                    Intent intent_asar = new Intent(getApplicationContext(), ExecutableService.class);
-                                    intent_asar.putExtra("val", "asar");
-
-                                    PendingIntent pendingIntent_asar = PendingIntent.getBroadcast(getApplicationContext(), 768564, intent_asar, 0);
-                                    if (c3.before(Calendar.getInstance())) {
-                                        c3.add(Calendar.DATE, 1);
-                                    }
-
-                                    if (alarmManager_asar != null) {
-                                        alarmManager_asar.setRepeating(AlarmManager.RTC_WAKEUP,
-                                                c3.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent_asar); //Repeat every 24 hours
-                                        //Toast.makeText(getApplicationContext(), "Alarm Set Asar!", Toast.LENGTH_SHORT).show();
-                                        Log.d("Asar", "onResponse: Alarm Set Asar");
-                                    }
-                                }
-                                ///////////////////////////////////////////////
-                                /////////////////////////////////////////////
-                                String alaramtime_maghrib = mm;
-                                String alaramtimesplit_maghrib[] = alaramtime_maghrib.split(":");
-                                int firstval_maghrib = Integer.parseInt(alaramtimesplit_maghrib[0]);//4
-                                int secondval_maghrib = Integer.parseInt(alaramtimesplit_maghrib[1]);   //05
-
-                                Calendar c4 = Calendar.getInstance();
-                                c4.set(Calendar.HOUR_OF_DAY, firstval_maghrib);
-                                c4.set(Calendar.MINUTE, secondval_maghrib);
-                                c4.set(Calendar.SECOND, 0);
-
-                                if (getApplicationContext() != null) {
-                                    AlarmManager alarmManager_maghrib = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-                                    Intent intent_maghrib = new Intent(getApplicationContext(), ExecutableService.class);
-                                    intent_maghrib.putExtra("val", "maghrib");
-
-                                    PendingIntent pendingIntent_zuhar = PendingIntent.getBroadcast(getApplicationContext(), 980324, intent_maghrib, 0);
-                                    if (c4.before(Calendar.getInstance())) {
-                                        c4.add(Calendar.DATE, 1);
-                                    }
-
-                                    if (alaramtime_maghrib != null) {
-                                        alarmManager_maghrib.setRepeating(AlarmManager.RTC_WAKEUP,
-                                                c4.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent_zuhar); //Repeat every 24 hours
-                                        Log.d("Maghrib", "onResponse: Alarm Set Maghrib");
-                                    }
-                                }
-                                ///////////////////////////////////////////////
-                                /////////////////////////////////////////////
-                                String alaramtime_isha = ii;
-                                String alaramtimesplit_isha[] = alaramtime_isha.split(":");
-                                int firstval_isha = Integer.parseInt(alaramtimesplit_isha[0]);//4
-                                int secondval_isha = Integer.parseInt(alaramtimesplit_isha[1]);   //05
-
-                                Calendar c5 = Calendar.getInstance();
-                                c5.set(Calendar.HOUR_OF_DAY, firstval_isha);
-                                c5.set(Calendar.MINUTE, secondval_isha);
-                                c5.set(Calendar.SECOND, 0);
-
-                                if (getApplicationContext() != null) {
-                                    AlarmManager alarmManager_isha = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
-                                    Intent intent_isha = new Intent(getApplicationContext(), ExecutableService.class);
-                                    intent_isha.putExtra("val", "isha");
-
-                                    PendingIntent pendingIntent_isha = PendingIntent.getBroadcast(getApplicationContext(), 764687, intent_isha, 0);
-                                    if (c5.before(Calendar.getInstance())) {
-                                        c5.add(Calendar.DATE, 1);
-                                    }
-
-                                    if (alaramtime_isha != null) {
-                                        alarmManager_isha.setRepeating(AlarmManager.RTC_WAKEUP,
-                                                c5.getTimeInMillis(), 24 * 60 * 60 * 1000, pendingIntent_isha); //Repeat every 24 hours
-                                        Log.d("Isha", "onResponse: Alarm Set Isha");
-                                    }
-                                }
-                                ///////////////////////////////////////////////
-
-                                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
 
                                     String f = "" + ff;
                                     String z = "" + zz;
@@ -473,11 +329,6 @@ public class NamazTimingsActivity extends AppCompatActivity {
         imgISha = findViewById(R.id.imgIsha);
         tvSunrise = findViewById(R.id.tv_sunrise);
         tvSunset = findViewById(R.id.tv_sunset);
-        fajar_fajar = findViewById(R.id.fajar);
-        zuhur_zuhar = findViewById(R.id.Zuhar);
-        asar_asar = findViewById(R.id.Asar);
-        maghrib_maghrib = findViewById(R.id.Maghrib);
-        isha_isha = findViewById(R.id.Isha);
         tvLocation1 = findViewById(R.id.tvLocation1);
         c_time = findViewById(R.id.c_time);
         prefs = this.getSharedPreferences(MY_PREFS_NAME, MODE_PRIVATE);
@@ -537,6 +388,43 @@ public class NamazTimingsActivity extends AppCompatActivity {
             Log.d("req_check_setting_namaz", "onActivityResult: " + gpsTracker.REQUEST_CHECK_SETTING);
             startActivity(new Intent(this, NamazTimingsActivity.class));
             finish();
+        }
+    }
+
+    private void setAlarm(String namazTime, int requestCode, String namazName) {
+        String alaramtime_fajar = namazTime;
+        String alaramtimesplit_fajar[] = alaramtime_fajar.split(":");  // 04:05
+        int firstval_fajar = Integer.parseInt(alaramtimesplit_fajar[0]);
+        int secondval_fajar = Integer.parseInt(alaramtimesplit_fajar[1]);
+
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.HOUR_OF_DAY, firstval_fajar);
+        c.set(Calendar.MINUTE, secondval_fajar);
+        c.set(Calendar.SECOND, 0);
+
+        if (getApplicationContext() != null) {
+            AlarmManager am = (AlarmManager) getApplicationContext().getSystemService(Context.ALARM_SERVICE);
+            Intent intent = new Intent(getApplicationContext(), ExecutableService.class);
+            intent.putExtra("val", namazName);
+            intent.putExtra("h", firstval_fajar);
+            intent.putExtra("m", secondval_fajar);
+            intent.putExtra("r", requestCode);
+
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), requestCode, intent, 0);
+
+            if (c.before(Calendar.getInstance())) {
+                c.add(Calendar.DATE, 1);
+            }
+
+            if (am != null) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    am.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+                } else if (Build.VERSION.SDK_INT >= 19 && Build.VERSION.SDK_INT <= 20) {
+                    am.set(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+                } else if (Build.VERSION.SDK_INT > 20) {
+                    am.setExact(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(), pendingIntent);
+                }
+            }
         }
     }
 }
