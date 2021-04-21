@@ -9,7 +9,6 @@ import com.google.android.gms.ads.MobileAds
 import com.google.android.gms.ads.RequestConfiguration
 import java.util.*
 
-
 fun Context.showBanner(bannerLayout: FrameLayout) {
 
     val adaptiveAds = AdaptiveAds(this)

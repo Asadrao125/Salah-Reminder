@@ -20,7 +20,6 @@ public class NotificationHelper extends ContextWrapper {
     public static final String channelID = "channelID";
     public static final String channelName = "Channel Name";
     private NotificationManager notificationManager;
-    public String text;
 
     public NotificationHelper(Context base) {
         super(base);
@@ -44,7 +43,6 @@ public class NotificationHelper extends ContextWrapper {
 
     @SuppressLint("ResourceAsColor")
     public NotificationCompat.Builder getChannelNotification(String namazName) {
-
         Intent activityIntent = new Intent(getApplicationContext(), NamazTimingsActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
 
@@ -53,8 +51,8 @@ public class NotificationHelper extends ContextWrapper {
         PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, brodcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle(namazName + " Time Alert")
-                .setSmallIcon(R.mipmap.official_logo)
+                .setContentTitle(namazName + " Prayer Time")
+                .setSmallIcon(R.mipmap.app_icon)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setColor(R.color.colorPrimary)
                 .setContentIntent(contentIntent)
@@ -66,8 +64,8 @@ public class NotificationHelper extends ContextWrapper {
         Intent activityIntent = new Intent(getApplicationContext(), NamazTimingsActivity.class);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 1, activityIntent, 0);
         return new NotificationCompat.Builder(getApplicationContext(), channelID)
-                .setContentTitle(namazName + " Time Alert")
-                .setSmallIcon(R.mipmap.official_logo)
+                .setContentTitle(namazName + " Prayer Time")
+                .setSmallIcon(R.mipmap.app_icon)
                 .setDefaults(Notification.DEFAULT_ALL)
                 .setColor(R.color.colorPrimary)
                 .setContentIntent(contentIntent);

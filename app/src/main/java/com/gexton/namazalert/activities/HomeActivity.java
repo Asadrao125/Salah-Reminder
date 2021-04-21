@@ -31,6 +31,7 @@ import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 
+import net.time4j.PlainDate;
 import net.time4j.SystemClock;
 import net.time4j.android.ApplicationStarter;
 import net.time4j.calendar.HijriCalendar;
@@ -40,6 +41,11 @@ import net.time4j.format.expert.PatternType;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
+import java.time.chrono.HijrahChronology;
+import java.time.chrono.HijrahDate;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -68,6 +74,37 @@ public class HomeActivity extends AppCompatActivity {
             SharedPref.write("maghrib", "no");
             SharedPref.write("isha", "no");
         }
+
+        /* ***************************************************************************************** */
+
+        HijrahDate hd = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            hd = HijrahDate.from(LocalDate.of(2021, 4, 20));
+            System.out.println("java.time=" + hd); // Hijrah-umalqura AH 1437-12-19
+            //Toast.makeText(this, "" + hd, Toast.LENGTH_SHORT).show();
+        }
+
+        System.out.println(PlainDate.of(2021, 4, 20).transform(HijriCalendar.class, HijriCalendar.VARIANT_UMALQURA));
+        //Toast.makeText(this, "" + PlainDate.of(2021, 4, 20).transform(HijriCalendar.class,HijriCalendar.VARIANT_UMALQURA), Toast.LENGTH_LONG).show();
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            HijrahDate hdate = HijrahChronology.INSTANCE.date(LocalDate.of(2021, Month.APRIL, 20));
+            //Toast.makeText(this, "" + hdate, Toast.LENGTH_LONG).show();
+        }
+
+        // Using Joda Times Library
+        Date date = new Date();
+        Calendar cl = Calendar.getInstance();
+        cl.setTime(date);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            HijrahDate islamyDate = HijrahChronology.INSTANCE.date(LocalDate.of(cl.get(Calendar.YEAR), cl.get(Calendar.MONTH) + 1, cl.get(Calendar.DATE)));
+            // 1436-02-03 : yyyy-mm-dd
+            // Toast.makeText(this, "" + islamyDate, Toast.LENGTH_SHORT).show();
+            Log.d("current_date", "onCreate: " + islamyDate);
+        }
+        // Using Joda Times Library
+
+        /* ***************************************************************************************** */
 
         SingletonAds.Companion.init(this);
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
@@ -176,18 +213,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void checkPermission2() {
-        Dexter.withContext(this)
-                .withPermissions(
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.VIBRATE,
-                        Manifest.permission.SET_ALARM
-                ).withListener(new MultiplePermissionsListener() {
+        Dexter.withContext(this).withPermissions(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.VIBRATE,
+                Manifest.permission.SET_ALARM
+        ).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
                 if (report.areAllPermissionsGranted()) {
                     gpsTracker = new GPSTracker(HomeActivity.this);
-                    if (gpsTracker.canGetLocation()){
+                    if (gpsTracker.canGetLocation()) {
                         setCity();
                     } else {
                         gpsTracker.enableLocationPopup();
@@ -221,13 +257,12 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void checkPermission() {
-        Dexter.withContext(this)
-                .withPermissions(
-                        Manifest.permission.ACCESS_COARSE_LOCATION,
-                        Manifest.permission.ACCESS_FINE_LOCATION,
-                        Manifest.permission.VIBRATE,
-                        Manifest.permission.SET_ALARM
-                ).withListener(new MultiplePermissionsListener() {
+        Dexter.withContext(this).withPermissions(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                Manifest.permission.VIBRATE,
+                Manifest.permission.SET_ALARM
+        ).withListener(new MultiplePermissionsListener() {
             @Override
             public void onPermissionsChecked(MultiplePermissionsReport report) {
                 if (report.areAllPermissionsGranted()) {
@@ -252,9 +287,8 @@ public class HomeActivity extends AppCompatActivity {
         HijriCalendar today = SystemClock.inLocalView().today().transform(HijriCalendar.class, HijriCalendar.VARIANT_UMALQURA);
         System.out.println(hijriFormat.format(today)); // 22nd Rajab 1438
 
-        HijriCalendar todayExact = SystemClock.inLocalView()
-                .now(HijriCalendar.family(),
-                        HijriCalendar.VARIANT_UMALQURA, StartOfDay.EVENING).toDate();
+        HijriCalendar todayExact = SystemClock.inLocalView().now(HijriCalendar.family(),
+                HijriCalendar.VARIANT_UMALQURA, StartOfDay.EVENING).toDate();
         System.out.println(hijriFormat.format(todayExact)); // 22nd Rajab 1438 (23rd after 18:00)
         tvHijriDate.setText("" + hijriFormat.format(todayExact));
     }

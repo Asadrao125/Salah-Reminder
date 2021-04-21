@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import com.gexton.namazalert.AdsManager.SingletonAds;
 import com.gexton.namazalert.BuildConfig;
 import com.gexton.namazalert.R;
-import com.gexton.namazalert.tasbeeh_files.AboutDialog;
 
 import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
@@ -73,11 +72,6 @@ public class SettingsActivity extends AppCompatActivity {
         } catch (Exception e) {
 
         }
-    }
-
-    public void openAboutDialog() {
-        AboutDialog aboutDialog = new AboutDialog(this);
-        aboutDialog.show(getSupportFragmentManager(), "about dialog");
     }
 
 }

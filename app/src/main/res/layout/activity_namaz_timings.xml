@@ -1,492 +1,356 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:background="@color/colorWhite"
-    tools:context="com.gexton.namazalert.activities.NamazTimingsActivity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/upper_screen_layout"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/mosque"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <LinearLayout
-            android:weightSum="3"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="horizontal"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvLocation1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arialnarrow7"
-                    android:maxLength="21"
-                    android:text="Location Text Will Be"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="15sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/sunrise" />
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arialnarrow7"
-                    android:text="Sunrise"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/tv_sunrise"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arialnarrow7"
-                    android:text="5 : 20 pm"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_margin="20dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:layout_width="5px"
-                    android:layout_height="50dp"
-                    android:background="@color/colorWhite"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_weight="1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/c_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arialnarrow7"
-                    android:text="00 : 00 AM"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="30sp"
-                    android:textStyle="bold" />
-
-                <ImageView
-                    android:layout_gravity="center"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/sunset" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arialnarrow7"
-                    android:text="Sunset"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_gravity="center"
-                    android:id="@+id/tv_sunset"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/arialnarrow7"
-                    android:text="7 : 10 pm"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    tools:context=".activities.NamazTimingsActivity"
+    android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/shap_layout"
+        android:background="@color/app_color"
+        android:padding="10dp"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginRight="15dp"
-        android:background="@drawable/shape"
         android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@id/fragmentcontainer"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/upper_screen_layout">
+        android:layout_height="wrap_content">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="16dp">
+        <ImageView
+            android:id="@+id/imgBack"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/back"/>
 
-            <ImageView
-                android:id="@+id/img_calender"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:src="@drawable/calender_white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.26"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt_View_Day"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:fontFamily="@font/arialnarrow7"
-                android:text="Today/Saturday"
-                android:textColor="@color/colorWhite"
-                android:textSize="17dp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@id/txt_View_Date"
-                app:layout_constraintStart_toEndOf="@id/img_calender"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/txt_View_Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="20dp"
-                android:text="18 July 2020"
-                android:textColor="@color/colorWhite"
-                android:textSize="15dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/img_calender"
-                app:layout_constraintTop_toBottomOf="@id/txt_View_Day" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Prayer Timings"
+            android:textSize="18sp"
+            android:textColor="@color/colorWhite"/>
 
     </LinearLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragmentcontainer"
+   <ScrollView
+       android:layout_below="@id/toolbar"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="vertical">
+
+           <LinearLayout
+               android:background="@drawable/bg_image"
+               android:gravity="center"
+               android:layout_marginTop="-2dp"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical">
+
+               <TextView
+                   android:id="@+id/tvLocation1"
+                   android:layout_marginTop="20dp"
+                   android:textColor="@color/colorWhite"
+                   android:textSize="16sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="Hyderabad, Pk"/>
+
+               <TextView
+                   android:id="@+id/c_time"
+                   android:layout_marginBottom="20dp"
+                   android:textColor="@color/colorWhite"
+                   android:layout_margin="10dp"
+                   android:textStyle="bold"
+                   android:textSize="18sp"
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="02:30 PM"/>
+
+
+               <LinearLayout
+                   android:layout_margin="20dp"
+                   android:gravity="center"
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:weightSum="2">
+
+                   <LinearLayout
+                       android:gravity="center"
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical">
+
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/sunrise"/>
+
+                       <TextView
+                           android:textSize="16sp"
+                           android:textColor="@color/colorWhite"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="SUNRISE"/>
+
+                       <TextView
+                           android:id="@+id/tv_sunrise"
+                           android:textStyle="bold"
+                           android:textSize="18sp"
+                           android:textColor="@color/colorWhite"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="06:11 AM"/>
+
+                   </LinearLayout>
+
+                   <View
+                       android:layout_width="5px"
+                       android:layout_height="50dp"
+                       android:background="@color/colorWhite"/>
+
+                   <LinearLayout
+                       android:gravity="center"
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:orientation="vertical">
+
+                       <ImageView
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:src="@drawable/sunset"/>
+
+                       <TextView
+                           android:textSize="16sp"
+                           android:textColor="@color/colorWhite"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="SUNSET"/>
+
+                       <TextView
+                           android:id="@+id/tv_sunset"
+                           android:textStyle="bold"
+                           android:textSize="18sp"
+                           android:textColor="@color/colorWhite"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:text="06:11 AM"/>
+
+                   </LinearLayout>
+
+               </LinearLayout>
+
+           </LinearLayout>
+
+           <LinearLayout
+               android:layout_marginTop="-1dp"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:orientation="vertical">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:weightSum="3">
+
+                   <TextView
+                       android:textColor="@color/colorWhite"
+                       android:padding="25dp"
+                       android:id="@+id/tvFajar"
+                       android:background="@color/color_1"
+                       android:gravity="center"
+                       android:text="05:07 AM"
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:layout_marginLeft="10dp"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"
+                       android:text="Fajr"
+                       android:layout_weight="1"
+                       android:layout_width="30dp"
+                       android:layout_height="wrap_content"/>
+
+                   <ImageView
+                       android:src="@drawable/n_off"
+                       android:layout_gravity="center"
+                       android:layout_weight="1"
+                       android:padding="10dp"
+                       android:id="@+id/imgFajar"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:weightSum="3">
+
+                   <TextView
+                       android:textColor="@color/colorWhite"
+                       android:padding="25dp"
+                       android:background="@color/color_2"
+                       android:gravity="center"
+                       android:id="@+id/tvZuhar"
+                       android:text="05:07 AM"
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:layout_marginLeft="10dp"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"
+                       android:text="Zuhar"
+                       android:layout_weight="1"
+                       android:layout_width="30dp"
+                       android:layout_height="wrap_content"/>
+
+                   <ImageView
+                       android:src="@drawable/n_off"
+                       android:layout_gravity="center"
+                       android:padding="10dp"
+                       android:id="@+id/imgZuhar"
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:weightSum="3">
+
+                   <TextView
+                       android:textColor="@color/colorWhite"
+                       android:padding="25dp"
+                       android:background="@color/color_3"
+                       android:id="@+id/tvAsar"
+                       android:gravity="center"
+                       android:text="05:07 AM"
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:layout_marginLeft="10dp"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"
+                       android:text="Asar"
+                       android:layout_weight="1"
+                       android:layout_width="30dp"
+                       android:layout_height="wrap_content"/>
+
+                   <ImageView
+                       android:src="@drawable/n_off"
+                       android:layout_gravity="center"
+                       android:padding="10dp"
+                       android:id="@+id/imgAsar"
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:weightSum="3">
+
+                   <TextView
+                       android:textColor="@color/colorWhite"
+                       android:padding="25dp"
+                       android:background="@color/color_4"
+                       android:gravity="center"
+                       android:text="05:07 AM"
+                       android:layout_weight="1"
+                       android:id="@+id/tvMaghrib"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:layout_marginLeft="10dp"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"
+                       android:text="Maghrib"
+                       android:layout_weight="1"
+                       android:layout_width="30dp"
+                       android:layout_height="wrap_content"/>
+
+                   <ImageView
+                       android:src="@drawable/n_off"
+                       android:layout_gravity="center"
+                       android:layout_weight="1"
+                       android:padding="10dp"
+                       android:id="@+id/imgMaghrib"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:weightSum="3">
+
+                   <TextView
+                       android:padding="25dp"
+                       android:id="@+id/tvIsha"
+                       android:textColor="@color/colorWhite"
+                       android:background="@color/color_5"
+                       android:gravity="center"
+                       android:text="05:07 AM"
+                       android:layout_weight="1"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+                   <TextView
+                       android:layout_marginLeft="10dp"
+                       android:textStyle="bold"
+                       android:textColor="@color/black"
+                       android:text="Isha"
+                       android:layout_weight="1"
+                       android:layout_width="30dp"
+                       android:layout_height="wrap_content"/>
+
+                   <ImageView
+                       android:src="@drawable/n_off"
+                       android:layout_gravity="center"
+                       android:layout_weight="1"
+                       android:id="@+id/imgIsha"
+                       android:padding="10dp"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"/>
+
+               </LinearLayout>
+
+           </LinearLayout>
+
+       </LinearLayout>
+
+   </ScrollView>
+
+    <FrameLayout
+        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/shap_layout">
+        android:layout_height="wrap_content"
+        android:id="@+id/ad_view_container"/>
 
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="34dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/silver"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ScrollView
-            android:id="@+id/scroll_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="30dp"
-                        android:src="@mipmap/fajar" />
-
-                    <TextView
-                        android:id="@+id/fajar"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/arialnarrow7"
-                        android:text="Fajar "
-                        android:textColor="@color/texr_color"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/tvFajar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/border"
-                        android:fontFamily="@font/digital"
-                        android:padding="8dp"
-                        android:text="00 : 00 AM"
-                        android:textColor="@color/texr_color"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/silver" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="30dp"
-                        android:src="@mipmap/zuhar" />
-
-                    <TextView
-                        android:id="@+id/Zuhar"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/arialnarrow7"
-                        android:text="Zuhar "
-                        android:textColor="@color/texr_color"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/tvZuhar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/border"
-                        android:fontFamily="@font/digital"
-                        android:padding="8dp"
-                        android:text="00 : 00 AM"
-                        android:textColor="@color/texr_color"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/silver" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="30dp"
-                        android:src="@mipmap/asar" />
-
-                    <TextView
-                        android:id="@+id/Asar"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/arialnarrow7"
-                        android:text="Asar "
-                        android:textColor="@color/texr_color"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/tvAsar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/border"
-                        android:fontFamily="@font/digital"
-                        android:padding="8dp"
-                        android:text="00 : 00 AM"
-                        android:textColor="@color/texr_color"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/silver" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="30dp"
-                        android:src="@mipmap/maghrib" />
-
-                    <TextView
-                        android:id="@+id/Maghrib"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/arialnarrow7"
-                        android:text="Maghrib "
-                        android:textColor="@color/texr_color"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/tvMaghrib"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/border"
-                        android:fontFamily="@font/digital"
-                        android:padding="8dp"
-                        android:text="00 : 00 AM"
-                        android:textColor="@color/texr_color"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_marginLeft="50dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="@color/silver" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="30dp"
-                        android:src="@mipmap/isha" />
-
-                    <TextView
-                        android:id="@+id/Isha"
-                        android:layout_width="140dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:fontFamily="@font/arialnarrow7"
-                        android:text="Isha "
-                        android:textColor="@color/texr_color"
-                        android:textSize="25dp" />
-
-                    <TextView
-                        android:id="@+id/tvIsha"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="40dp"
-                        android:layout_marginTop="20dp"
-                        android:background="@drawable/border"
-                        android:fontFamily="@font/digital"
-                        android:padding="8dp"
-                        android:text="00 : 00 AM"
-                        android:textColor="@color/texr_color"
-                        android:textSize="15dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </ScrollView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

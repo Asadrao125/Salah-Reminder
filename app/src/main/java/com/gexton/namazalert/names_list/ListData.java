@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import static com.gexton.namazalert.AdsManager.AdsKt.showBanner;
 
 public class ListData extends AppCompatActivity {
-
     int pos;
     ImageView image, imgBack;
     TextView name, meaning, description;
@@ -36,7 +35,7 @@ public class ListData extends AppCompatActivity {
         FrameLayout banner_container = findViewById(R.id.ad_view_container);
         showBanner(this, banner_container);
 
-        pos = getIntent().getIntExtra("Position", -1);
+        pos = getIntent().getIntExtra("Position", 10000);
         Log.e("position", String.valueOf(pos));
 
         image.setImageResource(HelperClass.imageLarge[pos]);

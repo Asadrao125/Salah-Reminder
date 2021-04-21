@@ -41,7 +41,6 @@ public class GPSTracker extends Service implements LocationListener, GoogleApiCl
     protected LocationManager locationManager;
     public int REQUEST_CHECK_SETTING = 123;
 
-
     public GPSTracker() {
     }
 
